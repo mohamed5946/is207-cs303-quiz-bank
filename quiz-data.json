@@ -1,0 +1,1372 @@
+[
+ {
+  "id": "I01",
+  "bank": "is207",
+  "topic": "الويب والبروتوكولات",
+  "q": "Common application layer protocols include:.......",
+  "options": [
+   "HTTP",
+   "DNS",
+   "FTP",
+   "A,b,c"
+  ],
+  "answer": 3,
+  "explanation": "الـ HTTP والـ DNS والـ FTP التلاتة بروتوكولات طبقة التطبيقات، فالإجابة A,b,c."
+ },
+ {
+  "id": "I02",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "....... Is not an Inline element in HTML.",
+  "options": [
+   "<h1>",
+   "<i>",
+   "<u>",
+   "None of the Previous"
+  ],
+  "answer": 0,
+  "explanation": "الـ <h1> عنصر block مش inline، أما <i> و <u> فـ inline."
+ },
+ {
+  "id": "I03",
+  "bank": "is207",
+  "topic": "الويب والبروتوكولات",
+  "q": "... opens link in a new window tab.",
+  "options": [
+   "src=\"_blank\"",
+   "alt=\"_blank\"",
+   "target=\"_self\"",
+   "target=\"_blank\""
+  ],
+  "answer": 3,
+  "explanation": "الـ target=\"_blank\" بيفتح اللينك في تاب جديد، أما target=\"_self\" فبيفتحه في نفس التاب."
+ },
+ {
+  "id": "I04",
+  "bank": "is207",
+  "topic": "الويب والبروتوكولات",
+  "q": "... maintains and maps the name of the website.",
+  "options": [
+   "HTTP",
+   "DNS",
+   "HTML",
+   "Browsers"
+  ],
+  "answer": 1,
+  "explanation": "الـ DNS هو اللي بيحوّل اسم الموقع (الـ domain) لعنوان IP."
+ },
+ {
+  "id": "I05",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "..... is used for creating clickable links.",
+  "options": [
+   "<link>",
+   "<http>",
+   "<cl>",
+   "<a>"
+  ],
+  "answer": 3,
+  "explanation": "التاج <a> هو اللي بيعمل اللينك، أما <link> فبيربط ملفات زي الـ CSS."
+ },
+ {
+  "id": "I06",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "... defines an internal style sheet.",
+  "options": [
+   "<script>",
+   "<link>",
+   "<class>",
+   "<style>"
+  ],
+  "answer": 3,
+  "explanation": "الـ <style> بيعرّف internal stylesheet جوّه الصفحة، أما <link> فبيربط ملف CSS خارجي."
+ },
+ {
+  "id": "I07",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "img[src] uses ... CSS selector",
+  "options": [
+   "class selector",
+   "universe selector",
+   "Id selector",
+   "Attribute selector"
+  ],
+  "answer": 3,
+  "explanation": "الـ img[src] بيختار الصور اللي عندها attribute اسمه src، فده attribute selector."
+ },
+ {
+  "id": "I08",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "Background-attachment is used to..",
+  "options": [
+   "control the scrolling of an image",
+   "set the background color",
+   "repeat the background image",
+   "set the position of background"
+  ],
+  "answer": 0,
+  "explanation": "الـ background-attachment بيتحكم في سكرول صورة الخلفية: fixed بتثبتها و scroll بتتحرك مع الصفحة."
+ },
+ {
+  "id": "I09",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "How can you include an external CSS file in an HTML document?",
+  "options": [
+   "<style src=\"styles.css\">",
+   "<link rel=\"stylesheet\" href=\"styles.css\">",
+   "<css href=\"styles.css\">",
+   "<import stylesheet=\"styles.css\">"
+  ],
+  "answer": 1,
+  "explanation": "الملف الخارجي بيتربط بـ <link rel=\"stylesheet\" href=\"...\"> جوّه الـ <head>."
+ },
+ {
+  "id": "I10",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "The list-style-image specifies...",
+  "options": [
+   "background-image",
+   "image position",
+   "arrange images",
+   "marker image"
+  ],
+  "answer": 3,
+  "explanation": "الـ list-style-image بيحدد صورة الـ marker بتاع عناصر القايمة بدل النقطة أو الرقم."
+ },
+ {
+  "id": "I11",
+  "bank": "is207",
+  "topic": "الويب والبروتوكولات",
+  "q": "........ is the address of a given unique resource on the Web.",
+  "options": [
+   "DNS",
+   "HTTP",
+   "URL",
+   "Scheme"
+  ],
+  "answer": 2,
+  "explanation": "الـ URL هو عنوان أي مورد على الويب، زي https://example.com/page."
+ },
+ {
+  "id": "I12",
+  "bank": "is207",
+  "topic": "الويب والبروتوكولات",
+  "q": "....... Is the type of category in which the owner domain is registered",
+  "options": [
+   "Scheme",
+   "Domain",
+   "Sub Domain",
+   "Top level Domain"
+  ],
+  "answer": 3,
+  "explanation": "الـ Top level Domain هو فئة الدومين (.com و .edu و .org) اللي بيتسجل تحتها الدومين."
+ },
+ {
+  "id": "I13",
+  "bank": "is207",
+  "topic": "الويب والبروتوكولات",
+  "q": "........ refers to the way in which Web pages (HTML documents) are linked together",
+  "options": [
+   "HTTP",
+   "Text",
+   "HTML",
+   "Mark Up"
+  ],
+  "answer": 2,
+  "explanation": "المفهوم الصح هو الـ hypertext — الصفحات مترابطة بلينكات — بس الاختيارات مافيهاش الكلمة دي، والأقرب منها (c) HTML لأن اللينكات بتتعمل بتاج <a> في الـ HTML."
+ },
+ {
+  "id": "I14",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "........Does not have a closing tag or any contents",
+  "options": [
+   "<P>",
+   "<h1>",
+   "<Img>",
+   "<HTML>"
+  ],
+  "answer": 2,
+  "explanation": "الـ <img> عنصر void: مالهوش closing tag ولا محتوى جوّاه، أما <p> و <h1> و <html> فلازم يتقفلوا."
+ },
+ {
+  "id": "I15",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "........ is not a block level element in HTML.",
+  "options": [
+   "<h1>",
+   "<i>",
+   "<p>",
+   "None of the previous"
+  ],
+  "answer": 1,
+  "explanation": "الـ <i> عنصر inline، أما <h1> و <p> فـ block level."
+ },
+ {
+  "id": "I16",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "...is the largest heading in HTML",
+  "options": [
+   "h1",
+   "hr",
+   "h6",
+   "head"
+  ],
+  "answer": 0,
+  "explanation": "أكبر heading هو <h1>، و <h6> هو أصغر واحد."
+ },
+ {
+  "id": "I17",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "... is styling HTML5 layout",
+  "options": [
+   "PhP",
+   "Jquery",
+   "Css",
+   "All of the above"
+  ],
+  "answer": 2,
+  "explanation": "الـ CSS هو اللي بيعمل styling وتنسيق الصفحة، مش PHP ولا jQuery."
+ },
+ {
+  "id": "I18",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "Metadata is contained in.....",
+  "options": [
+   "HTML tag",
+   "Head tag",
+   "Body tag",
+   "Title tag"
+  ],
+  "answer": 1,
+  "explanation": "الـ metadata (زي <meta> و <title>) بتتحط جوّه الـ <head>."
+ },
+ {
+  "id": "I19",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": ".....is used to insert an image in html pages.",
+  "options": [
+   "<img url=\"htmllogo.jpg\" />",
+   "<img alt=\"htmllogo.jpg\" />",
+   "<img src=\"htmllogo.jpg\" />",
+   "<img link=\"htmllogo.jpg\" />"
+  ],
+  "answer": 2,
+  "explanation": "الصورة بتتدرج بـ <img src=\"...\">، والـ src هو اللي فيه مسار الصورة."
+ },
+ {
+  "id": "I20",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "...is used to create a text area in html.",
+  "options": [
+   "<Text>",
+   "<textarea>",
+   "<input type=\"text\">",
+   "<input type=\"textarea\">"
+  ],
+  "answer": 1,
+  "explanation": "الـ <textarea> للنص الطويل متعدد الأسطر، أما <input type=\"text\"> فسطر واحد بس."
+ },
+ {
+  "id": "I21",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "Which tag is used to create a numbered list in HTML?",
+  "options": [
+   "<Nl>",
+   "<ol>",
+   "<ul>",
+   "<dl>"
+  ],
+  "answer": 1,
+  "explanation": "الـ <ol> هي الـ ordered list (مرقمة)، و <ul> نقط، و <dl> قايمة تعريفات."
+ },
+ {
+  "id": "I22",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "...is used to link an external style sheet in the HTML file.",
+  "options": [
+   "<link rel=\"stylesheet\" href=\"style.css\" />",
+   "<link rel=\"stylesheet\" src=\"style.css\" />",
+   "<style rel=\"stylesheet\" src=\"style.css\" />",
+   "<style rel=\"stylesheet\" link=\"style.css\"/>"
+  ],
+  "answer": 0,
+  "explanation": "الملف الخارجي بيتربط بـ <link rel=\"stylesheet\" href=\"style.css\"> — والـ href مش src."
+ },
+ {
+  "id": "I23",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "...is used to embed css in html page",
+  "options": [
+   "<inline>",
+   "<internal>",
+   "<css>",
+   "<style>"
+  ],
+  "answer": 3,
+  "explanation": "الـ CSS جوّه الصفحة بيتكتب بين <style>...</style> في الـ <head>."
+ },
+ {
+  "id": "I24",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "....creates a dropdown list.",
+  "options": [
+   "<dropdown>",
+   "<select>",
+   "<input>",
+   "<downlist>"
+  ],
+  "answer": 1,
+  "explanation": "الـ dropdown list بتتعمل بتاج <select>، والاختيارات جوّاها بتاج <option>."
+ },
+ {
+  "id": "I25",
+  "bank": "is207",
+  "topic": "الويب والبروتوكولات",
+  "q": "The .com at the URL represents....",
+  "options": [
+   "Top-level domain",
+   "Scheme",
+   "Domain name",
+   "Sub-domain"
+  ],
+  "answer": 0,
+  "explanation": "الـ .com ده top-level domain — فئة الدومين، مش اسم الدومين نفسه."
+ },
+ {
+  "id": "I26",
+  "bank": "is207",
+  "topic": "الويب والبروتوكولات",
+  "q": "Relative URLs are used to ...",
+  "options": [
+   "link other pages within the same site",
+   "link the same page with other sites",
+   "link other pages with other sites",
+   "does not link"
+  ],
+  "answer": 0,
+  "explanation": "الـ relative URL بيربط صفحات جوّه نفس الموقع من غير ما يكتب الدومين كامل."
+ },
+ {
+  "id": "I27",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "...Can Change HTML Content.",
+  "options": [
+   "window.write",
+   "getElementById",
+   "console.log",
+   "html.write"
+  ],
+  "answer": 1,
+  "explanation": "الـ document.getElementById(...) بيوصل للعنصر وبعدين تقدر تغيّر محتواه بـ innerHTML — أما console.log فبيطبع في الـ console بس."
+ },
+ {
+  "id": "I28",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "....is used to access HTML elements",
+  "options": [
+   "getElementById()",
+   "getElementbyId()",
+   "getElementByid()",
+   "None"
+  ],
+  "answer": 0,
+  "explanation": "الاسم بالظبط getElementById() — كابيتال I وكابيتال B و d صغيرة، أي تغيير في الكابيتال يبوّظها."
+ },
+ {
+  "id": "I29",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "What is the output: var x = 55;   var y = \"0\";   console.log(x + y);",
+  "options": [
+   "55",
+   "55\"0\"",
+   "\"5\" \"5\" \"0\"",
+   "\"550\""
+  ],
+  "answer": 3,
+  "explanation": "الـ 55 + \"0\" = \"550\": الجمع مع نص بيحوّل الرقم لنص ويلزقهم، فالناتج نص مش رقم."
+ },
+ {
+  "id": "I30",
+  "bank": "is207",
+  "topic": "الويب والبروتوكولات",
+  "q": "....are form's method.",
+  "options": [
+   "GET,PULL",
+   "GET,Post",
+   "Get,Pop",
+   "Get,Push"
+  ],
+  "answer": 1,
+  "explanation": "الـ form ليها طريقتين: GET و POST."
+ },
+ {
+  "id": "I31",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "... define options in a drop-down list.",
+  "options": [
+   "<drop-down>",
+   "<select>",
+   "<option>",
+   "<datalist>"
+  ],
+  "answer": 2,
+  "explanation": "الاختيارات جوّه الـ <select> بتتعرف بتاج <option>."
+ },
+ {
+  "id": "I32",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "...is the CSS selector in the following sentence:   p, li, h1 { color: red;}",
+  "options": [
+   "P, li,h1",
+   "color",
+   "Red",
+   "Color: Red"
+  ],
+  "answer": 0,
+  "explanation": "الـ selector هو الجزء اللي قبل القوس: p, li, h1 — أما color: red فدي الـ declaration."
+ },
+ {
+  "id": "I33",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "...uses the ID selector",
+  "options": [
+   "#para1",
+   ".center",
+   "*{p}",
+   "All of the above"
+  ],
+  "answer": 0,
+  "explanation": "الـ #para1 ده ID selector (الـ # للـ id)، أما .center فده class selector."
+ },
+ {
+  "id": "I34",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "...is a grouping content element.",
+  "options": [
+   "hr",
+   "br",
+   "h1",
+   "div"
+  ],
+  "answer": 3,
+  "explanation": "الـ <div> هو عنصر تجميع المحتوى (block container)، أما <hr> فخط أفقي و <br> سطر جديد."
+ },
+ {
+  "id": "I35",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "Which one is a true syntax:",
+  "options": [
+   "let person={Name:'John',age: 30};",
+   "var person={Name:John, age: 30};",
+   "var person={\"Name\":John,age: 30}",
+   "Al of the above"
+  ],
+  "answer": 0,
+  "explanation": "الصح بس (a): الـ 'John' لازم تبقى بين كوتس لأنها نص، وفي (b) و (c) الـ John من غير كوتس فالـ JavaScript هتدور على متغير اسمه John ومش هتلاقيه."
+ },
+ {
+  "id": "I36",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "..is an alphabetic list starts with \"D\"",
+  "options": [
+   "<ol type = \"A\" start = \"4\">",
+   "<nl type = \"A\" start = \"4\">",
+   "<ul type = \"A\" start = \"4\">",
+   "<ol type = \"A\" start = \"D\">"
+  ],
+  "answer": 0,
+  "explanation": "الـ start رقم مش حرف: 4 يعني الحرف الرابع في الأبجدية = D، والتاج الصح هو <ol> مش <ul> ولا <nl>."
+ },
+ {
+  "id": "I37",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "To delete a color property of car object",
+  "options": [
+   "delete color.car",
+   "pop car.color",
+   "delete car.color",
+   "pop color.car"
+  ],
+  "answer": 2,
+  "explanation": "الحذف من الـ object بـ delete object.property: delete car.color — أما pop فدي للمصفوفات بس."
+ },
+ {
+  "id": "I38",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "To access an object method use...keyword to refer object.",
+  "options": [
+   "method",
+   "this",
+   "object",
+   "Function"
+  ],
+  "answer": 1,
+  "explanation": "الـ this بتشاور على الـ object نفسه جوّه الـ method بتاعه."
+ },
+ {
+  "id": "I39",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "....tag is used to specify page expiry, page author, list of keywords, and page description.",
+  "options": [
+   "Title",
+   "Head",
+   "Meta",
+   "Style"
+  ],
+  "answer": 2,
+  "explanation": "تاج <meta> هو اللي بيحدد الـ expiry والـ author والـ keywords ووصف الصفحة."
+ },
+ {
+  "id": "I40",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "... attribute of the <script> tag refers to the external script file path.",
+  "options": [
+   "<a>",
+   "<link>",
+   "<href>",
+   "<src>"
+  ],
+  "answer": 3,
+  "explanation": "الـ src بتاع <script> هو اللي بيشاور على مسار ملف الـ JavaScript الخارجي."
+ },
+ {
+  "id": "I41",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "To add more space outside of field text ,use......",
+  "options": [
+   "padding",
+   "margin",
+   "border",
+   "width"
+  ],
+  "answer": 1,
+  "explanation": "الـ margin مسافة برّه العنصر، أما الـ padding فمسافة جوّه العنصر بين حدوده ومحتواه."
+ },
+ {
+  "id": "I42",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "JavaScript code can be placed in .....",
+  "options": [
+   "<body>, </body>",
+   "<meta>, </meta>",
+   "<title>, </title>",
+   "None"
+  ],
+  "answer": 0,
+  "explanation": "كود الـ JavaScript بيتحط في <script> جوّه الـ <body> (أو الـ <head>)، مش في <meta> ولا <title>."
+ },
+ {
+  "id": "I43",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "To display javascript output in a box, use....",
+  "options": [
+   "Console.log",
+   "Box.log",
+   "Window.alert",
+   "console.alert"
+  ],
+  "answer": 2,
+  "explanation": "الـ window.alert() بيعرض الناتج في صندوق منبثق، أما console.log فبيطبع في الـ console بس."
+ },
+ {
+  "id": "I44",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "Which HTML tag is used to define a hyperlink?",
+  "options": [
+   "<link>",
+   "<a>",
+   "<hyperlink>",
+   "<url>"
+  ],
+  "answer": 1,
+  "explanation": "الـ hyperlink بيتعمل بتاج <a> مع href، أما <link> فبيربط ملفات خارجية زي الـ CSS."
+ },
+ {
+  "id": "I45",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "Which HTML tag defines a large heading?",
+  "options": [
+   "<header>",
+   "<h1>",
+   "<main>",
+   "<big>"
+  ],
+  "answer": 1,
+  "explanation": "أكبر heading هو <h1>، أما <header> فده تاج بنية مش heading."
+ },
+ {
+  "id": "I46",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "What does the <hr /> element represent in HTML?",
+  "options": [
+   "Horizontal rule",
+   "Header",
+   "Hyperlink reference",
+   "Heading row"
+  ],
+  "answer": 0,
+  "explanation": "الـ <hr> يعني horizontal rule — خط أفقي بيفصل بين أجزاء الصفحة."
+ },
+ {
+  "id": "I47",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "What are the two required attributes of the <img> tag?",
+  "options": [
+   "title and caption",
+   "href and alt",
+   "src and alt",
+   "link and description"
+  ],
+  "answer": 2,
+  "explanation": "الـ <img> لازم ليه src (مسار الصورة) و alt (نص بديل لو الصورة مظهرتش)."
+ },
+ {
+  "id": "I48",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "How can an image be used as a link in HTML?",
+  "options": [
+   "<a src=\"image.jpg\">Link</a>",
+   "<a> <img src=\"image.jpg\" alt=\"Link\"> </a>",
+   "<a href=\"image.jpg\">Link</a>",
+   "<img href=\"image.jpg\" alt=\"Link\">"
+  ],
+  "answer": 1,
+  "explanation": "الصورة تبقى لينك لما تحط <img> جوّه <a>: <a><img src=\"image.jpg\" alt=\"Link\"></a>."
+ },
+ {
+  "id": "I49",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "What does the <a> tag's target attribute define in HTML?",
+  "options": [
+   "Font size",
+   "Location to open the linked document",
+   "Color of the linked text",
+   "Width of the linked image"
+  ],
+  "answer": 1,
+  "explanation": "الـ target بيحدد مكان فتح اللينك: _blank في تاب جديد و _self في نفس التاب."
+ },
+ {
+  "id": "I50",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "How do you represent the first item in an ordered list?",
+  "options": [
+   "<il>",
+   "<li>",
+   "<ol>",
+   "<ul>"
+  ],
+  "answer": 1,
+  "explanation": "كل item في أي قايمة بيتعمل بتاج <li>، والـ <ol> هو القايمة نفسها."
+ },
+ {
+  "id": "I51",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "What tag is used to define a table row in HTML?",
+  "options": [
+   "<row>",
+   "<tr>",
+   "<td>",
+   "<th>"
+  ],
+  "answer": 1,
+  "explanation": "صف الجدول <tr> (table row)، والخلية <td>، وعنوان العمود <th>."
+ },
+ {
+  "id": "I52",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "What tag is used to define a table cell in HTML?",
+  "options": [
+   "<tc>",
+   "<td>",
+   "<cell>",
+   "<th>"
+  ],
+  "answer": 1,
+  "explanation": "خلية الجدول <td> (table data)، أما <th> فخلية عنوان (header cell)."
+ },
+ {
+  "id": "I53",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "What HTML tag is used to create a text input field?",
+  "options": [
+   "<textfield>",
+   "<input type=\"text\">",
+   "<textinput>",
+   "<textbox>"
+  ],
+  "answer": 1,
+  "explanation": "حقل النص بيتعمل بـ <input type=\"text\">."
+ },
+ {
+  "id": "I54",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "How is a password input field created in an HTML form?",
+  "options": [
+   "<input type=\"password\">",
+   "<password>",
+   "<secret>",
+   "<input type=\"secret\">"
+  ],
+  "answer": 0,
+  "explanation": "حقل الباسورد بيتعمل بـ <input type=\"password\"> — الحروف بتظهر نقط."
+ },
+ {
+  "id": "I55",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "Which selector is used to select all elements with a specific class?",
+  "options": [
+   "#class",
+   ".class",
+   "*class*",
+   "class:"
+  ],
+  "answer": 1,
+  "explanation": "الـ class selector بيبدأ بنقطة: .class — أما # فدي للـ id."
+ },
+ {
+  "id": "I56",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "Which value of the `background-repeat` property will repeat an image both horizontally and vertically?",
+  "options": [
+   "repeat-x",
+   "repeat-y",
+   "no-repeat",
+   "repeat"
+  ],
+  "answer": 3,
+  "explanation": "الـ repeat بتكرر الصورة أفقي وعمودي، أما repeat-x فأفقي بس و repeat-y فعمودي بس."
+ },
+ {
+  "id": "I57",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "The ........ is the ideal way to present a glossary, list of terms and the description of each term.",
+  "options": [
+   "dt",
+   "dl",
+   "ul",
+   "ol"
+  ],
+  "answer": 1,
+  "explanation": "قايمة المصطلحات والتعريفات بتتعمل بـ <dl> (description list)، وجوّاها <dt> للمصطلح و <dd> للوصف."
+ },
+ {
+  "id": "I58",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "The ..........attribute defines space between table cells.",
+  "options": [
+   "cellpadding",
+   "cellborder",
+   "cellspacing",
+   "none"
+  ],
+  "answer": 2,
+  "explanation": "الـ cellspacing = المسافة بين الخلايا وبعضها — متلخبطهاش مع الـ cellpadding اللي جوّه الخلية."
+ },
+ {
+  "id": "I59",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "The ........... attribute represents the distance between cell borders and the content within a cell.",
+  "options": [
+   "cellpadding",
+   "cellborder",
+   "cellspacing",
+   "none"
+  ],
+  "answer": 0,
+  "explanation": "الـ cellpadding = المسافة بين حدود الخلية والمحتوى اللي جوّاها — عكس الـ cellspacing اللي بين الخلايا."
+ },
+ {
+  "id": "I60",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "...........attribute merge two or more columns into a single column in html tables.",
+  "options": [
+   "Colmerge",
+   "colspan",
+   "rowmerge",
+   "rowspan"
+  ],
+  "answer": 1,
+  "explanation": "الـ colspan بيدمج أعمدة (col = column)، أما rowspan فبيدمج صفوف."
+ },
+ {
+  "id": "I61",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "...........attribute merge two or more rows in html tables.",
+  "options": [
+   "Colmerge",
+   "colspan",
+   "rowmerge",
+   "rowspan"
+  ],
+  "answer": 3,
+  "explanation": "الـ rowspan بيدمج صفوف (row = صف)، أما colspan فبيدمج أعمدة."
+ },
+ {
+  "id": "I62",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "...................element is used to insert a scrolling area of text.",
+  "options": [
+   "textarea",
+   "scrollarea",
+   "marquee",
+   "none"
+  ],
+  "answer": 2,
+  "explanation": "الـ <marquee> هو اللي بيعمل نص متحرك (scrolling)، أما <textarea> فحقل إدخال نص."
+ },
+ {
+  "id": "I63",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "................is not considered as a form control.",
+  "options": [
+   "Check box",
+   "Radio button",
+   "Clickable button",
+   "Clickable link"
+  ],
+  "answer": 3,
+  "explanation": "الـ clickable link مش form control — أما الـ checkbox والـ radio والـ button فكلهم form controls."
+ },
+ {
+  "id": "I64",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "............... is used to get input long text content.",
+  "options": [
+   "Check box",
+   "Data list",
+   "Text area",
+   "Reset button"
+  ],
+  "answer": 2,
+  "explanation": "النص الطويل بيتاخد بـ <textarea>، أما <input type=\"text\"> فسطر واحد بس."
+ },
+ {
+  "id": "I65",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "background-repeat property will repeat ......... vertically by default.",
+  "options": [
+   "paragraph",
+   "heading",
+   "form",
+   "image"
+  ],
+  "answer": 3,
+  "explanation": "الـ background-repeat بيكرر صورة الخلفية (image) — والقيمة الافتراضية repeat بتكررها أفقي وعمودي."
+ },
+ {
+  "id": "I66",
+  "bank": "is207",
+  "topic": "CSS",
+  "q": "The ............attribute specifies an image for the marker rather than a bullet point or number.",
+  "options": [
+   "marker",
+   "image",
+   "list-style-image",
+   "bullet"
+  ],
+  "answer": 2,
+  "explanation": "الـ list-style-image بيحدد صورة للـ marker بتاع عناصر القايمة بدل النقطة أو الرقم."
+ },
+ {
+  "id": "I67",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "The javascript code is inserted between ............tags.",
+  "options": [
+   "<java>..</java>",
+   "<javascript>...</javascript>",
+   "<script>...</script>",
+   "<js>...</js>"
+  ],
+  "answer": 2,
+  "explanation": "كود الـ JavaScript بيتكتب بين <script> و </script> — مفيش تاج اسمه <javascript>."
+ },
+ {
+  "id": "I68",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "To add an element to the end of an array, you use the ............ method",
+  "options": [
+   "Unshift()",
+   "Pop()",
+   "Shift()",
+   "push()"
+  ],
+  "answer": 3,
+  "explanation": "الـ push() بيضيف في الآخر، و unshift() بيضيف في الأول — احفظهم: push آخر، unshift أول."
+ },
+ {
+  "id": "I69",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "To add an element to the beginning of an array, you use the........ method",
+  "options": [
+   "Unshift()",
+   "Pop()",
+   "Shift()",
+   "push()"
+  ],
+  "answer": 0,
+  "explanation": "الـ unshift() بيضيف في الأول، أما push() فبيضيف في الآخر."
+ },
+ {
+  "id": "I70",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "To remove an element from the end of an array, you use ........method.",
+  "options": [
+   "Unshift()",
+   "Pop()",
+   "Shift()",
+   "push()"
+  ],
+  "answer": 1,
+  "explanation": "الـ pop() بيشيل من الآخر، و shift() بيشيل من الأول — pop آخر، shift أول."
+ },
+ {
+  "id": "I71",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "To remove an element from the beginning of an array, you use the .........method.",
+  "options": [
+   "Unshift()",
+   "Pop()",
+   "Shift()",
+   "push()"
+  ],
+  "answer": 2,
+  "explanation": "الـ shift() بيشيل من الأول، أما pop() فبيشيل من الآخر."
+ },
+ {
+  "id": "I72",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "let x = 5;  let z = x ** 2;  x ** y produces the same result as ..........",
+  "options": [
+   "Math.pow(x,y)",
+   "X multiply by Y",
+   "X by 2Y",
+   "none"
+  ],
+  "answer": 0,
+  "explanation": "الـ ** هو operator الأس، و x ** y = Math.pow(x,y) — مش ضرب ولا ضرب في 2."
+ },
+ {
+  "id": "I73",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "For debugging purposes, you can call the ......... method in the browser to display data.",
+  "options": [
+   "Window.alert",
+   "console.log",
+   "inner.HTML",
+   "getElementById"
+  ],
+  "answer": 1,
+  "explanation": "الـ console.log() بيطبع الداتا في الـ console للـ debugging، أما window.alert فبيطلع صندوق منبثق."
+ },
+ {
+  "id": "I74",
+  "bank": "is207",
+  "topic": "JavaScript",
+  "q": "...................allows you to add interactivity to a web page.",
+  "options": [
+   "html",
+   "css",
+   "javscript",
+   "none"
+  ],
+  "answer": 2,
+  "explanation": "الـ JavaScript هي اللي بتضيف التفاعلية للصفحة — الـ HTML بنية والـ CSS تنسيق بس."
+ },
+ {
+  "id": "I75",
+  "bank": "is207",
+  "topic": "الويب والبروتوكولات",
+  "q": "Common application layer protocols include:.......",
+  "options": [
+   "HTTP",
+   "DNS",
+   "FTP",
+   "A,b,c"
+  ],
+  "answer": 3,
+  "explanation": "الـ HTTP والـ DNS والـ FTP التلاتة بروتوكولات طبقة التطبيقات."
+ },
+ {
+  "id": "I76",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "....... Is not an Inline element in HTML.",
+  "options": [
+   "<h1>",
+   "<i>",
+   "<u>",
+   "None of the Previous"
+  ],
+  "answer": 0,
+  "explanation": "الـ <h1> عنصر block مش inline."
+ },
+ {
+  "id": "I77",
+  "bank": "is207",
+  "topic": "الويب والبروتوكولات",
+  "q": "... opens link in a new window tab.",
+  "options": [
+   "src=\"_blank\"",
+   "alt=\"_blank\"",
+   "target=\"_self\"",
+   "target=\"_blank\""
+  ],
+  "answer": 3,
+  "explanation": "الـ target=\"_blank\" بيفتح اللينك في تاب جديد."
+ },
+ {
+  "id": "I78",
+  "bank": "is207",
+  "topic": "الويب والبروتوكولات",
+  "q": "... maintains and maps the name of the website.",
+  "options": [
+   "HTTP",
+   "DNS",
+   "HTML",
+   "Browsers"
+  ],
+  "answer": 1,
+  "explanation": "الـ DNS هو اللي بيحوّل اسم الموقع لعنوان IP."
+ },
+ {
+  "id": "I79",
+  "bank": "is207",
+  "topic": "HTML",
+  "q": "..... is used for creating clickable links.",
+  "options": [
+   "<link>",
+   "<http>",
+   "<cl>",
+   "<a>"
+  ],
+  "answer": 3,
+  "explanation": "التاج <a> هو اللي بيعمل اللينك."
+ },
+ {
+  "id": "C01",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "P1 (arrival 0, burst 8), P2 (arrival 1, burst 4), P3 (arrival 2, burst 9), P4 (arrival 3, burst 5). What is the average waiting time under SRTF?",
+  "options": [
+   "5.5",
+   "6.5",
+   "7.25",
+   "8"
+  ],
+  "answer": 1,
+  "explanation": "الـ Gantt: P1 0–1، P2 1–5، P4 5–10، P1 10–17، P3 17–26. أوقات الانتظار: 9 و 0 و 15 و 2، المتوسط = 26/4 = 6.5."
+ },
+ {
+  "id": "C02",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "Round Robin, quantum = 2. P1 (arrival 0, burst 5), P2 (arrival 0, burst 3). What is the average waiting time?",
+  "options": [
+   "2.5",
+   "3",
+   "3.5",
+   "4"
+  ],
+  "answer": 2,
+  "explanation": "الـ Gantt: P1 0–2، P2 2–4، P1 4–6، P2 6–7، P1 7–8. الانتظار: P1 = 3 و P2 = 4، المتوسط = 7/2 = 3.5."
+ },
+ {
+  "id": "C03",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "Which scheduling algorithm can cause starvation of long processes?",
+  "options": [
+   "FCFS",
+   "SJF",
+   "Round Robin",
+   "None of them"
+  ],
+  "answer": 1,
+  "explanation": "الـ SJF بيفضّل العمليات القصيرة، فالعملية الطويلة ممكن تستنى للأبد لو العمليات القصيرة بتتابع — وده الـ starvation."
+ },
+ {
+  "id": "C04",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "A job arrives at 0, first runs at 3, finishes at 12, and has a burst of 6. What is its response time?",
+  "options": [
+   "3",
+   "6",
+   "9",
+   "12"
+  ],
+  "answer": 0,
+  "explanation": "الـ response time = أول مرة يشتغل − وقت الوصول = 3 − 0 = 3. متلخبطهاش مع الـ waiting (turnaround − burst = 12 − 6 = 6) ولا الـ turnaround (12)."
+ },
+ {
+  "id": "C05",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "Which algorithm suffers most from the convoy effect?",
+  "options": [
+   "FCFS",
+   "SJF",
+   "Round Robin",
+   "SRTF"
+  ],
+  "answer": 0,
+  "explanation": "في الـ FCFS العملية الطويلة اللي في الأول بتوقف كل اللي وراها — وده الـ convoy effect."
+ },
+ {
+  "id": "C06",
+  "bank": "cs303",
+  "topic": "حالات العمليات",
+  "q": "A process in the Blocked state is:",
+  "options": [
+   "Executing on the CPU",
+   "Waiting for an event such as I/O",
+   "Waiting to be assigned to a processor",
+   "Terminated"
+  ],
+  "answer": 1,
+  "explanation": "الـ Blocked يعني مستني حدث زي الـ I/O يخلص. اللي مستني processor بس هو الـ Ready، واللي شغال على الـ CPU هو الـ Running."
+ },
+ {
+  "id": "C07",
+  "bank": "cs303",
+  "topic": "العمليات: fork و exec",
+  "q": "A program calls fork() twice in a row, then prints \"X\". How many \"X\" lines appear?",
+  "options": [
+   "2",
+   "3",
+   "4",
+   "6"
+  ],
+  "answer": 2,
+  "explanation": "كل fork بيضاعف عدد العمليات: 2^2 = 4 عمليات، وكل واحدة بتطبع X."
+ },
+ {
+  "id": "C08",
+  "bank": "cs303",
+  "topic": "حالات العمليات",
+  "q": "When a process finishes its I/O wait, it moves to the:",
+  "options": [
+   "Running",
+   "Ready",
+   "Terminated",
+   "New"
+  ],
+  "answer": 1,
+  "explanation": "بعد ما الـ I/O يخلص بيرجع Ready، وعمره ما يروح Running على طول — الـ Running بتيجي من الـ Ready بس عن طريق الـ dispatcher."
+ },
+ {
+  "id": "C09",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "Which is NOT a requirement for a solution to the critical-section problem?",
+  "options": [
+   "Mutual exclusion",
+   "Progress",
+   "Bounded waiting",
+   "Preemption"
+  ],
+  "answer": 3,
+  "explanation": "الشروط التلاتة هي mutual exclusion و progress و bounded waiting — والـ preemption مش منهم."
+ },
+ {
+  "id": "C10",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "A race condition occurs when:",
+  "options": [
+   "Two processes run on different CPUs",
+   "The result depends on the timing or order of process execution",
+   "A process waits for I/O",
+   "The memory is full"
+  ],
+  "answer": 1,
+  "explanation": "الـ race condition يعني النتيجة بتعتمد على ترتيب وتوقيت تنفيذ العمليات — لأنهم بيشاركوا نفس الداتا من غير حماية."
+ },
+ {
+  "id": "C11",
+  "bank": "cs303",
+  "topic": "قانون أمدال",
+  "q": "50% of a program is serial. What is the speedup (Amdahl's law) with 4 cores?",
+  "options": [
+   "1.6",
+   "2",
+   "2.5",
+   "4"
+  ],
+  "answer": 0,
+  "explanation": "قانون أمدال: 1 / (0.5 + 0.5/4) = 1 / 0.625 = 1.6. الجزء الـ serial هو اللي بيحدّ السرعة."
+ },
+ {
+  "id": "C12",
+  "bank": "cs303",
+  "topic": "الجمود (Deadlock)",
+  "q": "Imposing a fixed order on all resources breaks which deadlock condition?",
+  "options": [
+   "Mutual exclusion",
+   "Hold and wait",
+   "Circular wait",
+   "No preemption"
+  ],
+  "answer": 2,
+  "explanation": "ترتيب ثابت للموارد بيمنع الـ circular wait — مفيش دايرة طلبات تتكون لو الكل بيطلب بنفس الترتيب."
+ },
+ {
+  "id": "C13",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "SJF is optimal because it gives the minimum average turnaround time.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — الـ SJF هو الـ optimal لأنه بيدي أقل average WAITING time، مش turnaround."
+ },
+ {
+  "id": "C14",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "Increasing the Round Robin time quantum always decreases the average waiting time.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — كل ما الـ quantum يكبر الـ RR بيقرب من الـ FCFS، والانتظار ممكن يزيد مش يقل."
+ },
+ {
+  "id": "C15",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "Under preemptive SJF (SRTF), a newly arriving process with a shorter remaining time preempts the running process.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 0,
+  "explanation": "صح — دي فكرة الـ preemptive SJF: أي عملية جديدة بوقت متبقّي أقل بتوقف اللي شغالة وتاخد الـ CPU."
+ },
+ {
+  "id": "C16",
+  "bank": "cs303",
+  "topic": "العمليات: fork و exec",
+  "q": "A zombie process is still running and consuming CPU.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — الـ zombie مات خلاص ومش بيستهلك CPU، اللي فاضل بس مدخله في جدول العمليات لحد ما الأب يعمل wait(). احفظها: zombie = ابن ميت."
+ },
+ {
+  "id": "C17",
+  "bank": "cs303",
+  "topic": "العمليات: fork و exec",
+  "q": "After a successful exec, the next line of the old program runs.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — الـ exec الناجح مبييرجعش أبدًا: نفس الـ PID بيكمل بالبرنامج الجديد، والسطر اللي بعد الـ exec مبيتنفذش."
+ },
+ {
+  "id": "C18",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "Two threads incrementing a shared counter without a lock can lose updates because the increment is not atomic.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 0,
+  "explanation": "صح — الـ increment تلات خطوات (اقرأ، زوّد، اكتب)، و thread تاني ممكن يدخل في النص ويضيّع تحديث."
+ },
+ {
+  "id": "C19",
+  "bank": "cs303",
+  "topic": "التزامن",
+  "q": "Concurrency means tasks execute at exactly the same instant.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — ده الـ parallelism. الـ concurrency يعني المهام بتتقدم بالتناوب، مش لازم في نفس اللحظة."
+ },
+ {
+  "id": "C20",
+  "bank": "cs303",
+  "topic": "الجمود (Deadlock)",
+  "q": "Deadlock can occur only if all four conditions hold at the same time: mutual exclusion, hold-and-wait, no preemption, circular wait.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 0,
+  "explanation": "صح — لازم الشروط الأربعة تتجمع مع بعض عشان يحصل deadlock، وكسر أي شرط منهم بيمنعه."
+ }
+]

@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href="data:," />
+    <title>IS 207 + CS 303 Quiz Bank</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        color-scheme: light;
+        --bg:#F7F4E9;
+        --surface:#FFFFFF;
+        --surface-2:#F1EEDF;
+        --ink:#1F2937;
+        --ink-soft:#4E7A8E;
+        --ink-faint:#6B7280;
+        --line:#E4DFC9;
+        --accent:#1E5A7A;
+        --accent-strong:#1E5A7A;
+        --accent-soft:#E4EDF1;
+        --amber:#D97706;
+        --amber-soft:#FBEED3;
+        --good:#16A34A;
+        --good-soft:#DCFCE7;
+        --good-line:#8FD8A8;
+        --bad:#DC2626;
+        --bad-soft:#FEE2E2;
+        --bad-line:#F2A9A9;
+        --shadow:0 10px 30px rgba(31,41,55,.09);
+        --shadow-sm:0 3px 12px rgba(31,41,55,.07);
+        --radius:18px;
+        --ease:cubic-bezier(.22,.9,.28,1);
+      }
+      *{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{
+        margin:0;
+        font-family:"Cairo",system-ui,sans-serif;
+        color:var(--ink);
+        background:var(--bg);
+        min-height:100vh;
+        -webkit-tap-highlight-color:transparent;
+      }
+      button{font-family:inherit;cursor:pointer}
+      .wrap{max-width:860px;margin:0 auto;padding:0 16px 90px}
+
+      /* ---------- Header / stats ---------- */
+      header{padding:26px 0 6px}
+      h1{font-size:clamp(24px,5.4vw,34px);font-weight:900;margin:0 0 6px;letter-spacing:-.2px}
+      h1 .en{color:var(--accent)}
+      .sub{color:var(--ink-soft);font-size:15.5px;margin:0;line-height:1.7}
+      .stats{
+        margin-top:18px;background:var(--surface);border:1px solid var(--line);
+        border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:16px 18px 14px;
+      }
+      .stats-row{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:baseline}
+      .stat b{font-size:21px;font-weight:900;font-variant-numeric:tabular-nums}
+      .stat span{color:var(--ink-soft);font-size:13.5px;margin-inline-start:5px}
+      .stat.good b{color:var(--good)}
+      .stat.bad b{color:var(--bad)}
+      .stat.pct{margin-inline-start:auto}
+      .stat.pct b{color:var(--accent-strong)}
+      .bar{height:9px;background:var(--surface-2);border-radius:99px;margin-top:12px;overflow:hidden}
+      .bar i{display:block;height:100%;width:0;border-radius:99px;
+        background:linear-gradient(90deg,var(--accent),var(--ink-soft));
+        transition:width .7s var(--ease)}
+      .bar-note{margin-top:8px;font-size:13px;color:var(--ink-faint)}
+
+      /* ---------- Controls ---------- */
+      .controls{position:static;padding:12px 0 10px;background:transparent}
+      .row2{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+      .search{flex:1 1 200px;display:flex;align-items:center;gap:8px;background:var(--surface);
+        border:1px solid var(--line);border-radius:12px;padding:0 12px;min-height:46px;box-shadow:var(--shadow-sm)}
+      .search svg{flex:none;opacity:.55}
+      .search input{border:0;outline:0;background:transparent;font:inherit;font-size:15px;color:var(--ink);width:100%;min-height:44px}
+      .search input::placeholder{color:var(--ink-faint)}
+      .tool{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;
+        padding:0 14px;min-height:46px;font-weight:700;font-size:14px;box-shadow:var(--shadow-sm);
+        transition:transform .18s var(--ease),background .25s var(--ease),color .25s var(--ease);display:inline-flex;align-items:center;gap:7px}
+      .tool:active{transform:scale(.96)}
+      .tool.on{background:var(--accent-soft);color:var(--accent-strong);border-color:var(--accent)}
+      .chips{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+      .chip{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);border-radius:99px;
+        padding:8px 14px;min-height:38px;font-size:13.5px;font-weight:700;
+        transition:all .25s var(--ease)}
+      .chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+      .count-line{margin:14px 2px 4px;color:var(--ink-faint);font-size:13.5px;font-weight:500}
+
+      /* ---------- Question cards ---------- */
+      @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+      .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+        box-shadow:var(--shadow-sm);padding:20px 20px 16px;margin-top:14px;
+        animation:rise .55s var(--ease) both;
+        transition:border-color .4s var(--ease), box-shadow .4s var(--ease)}
+      .card.is-good{border-color:var(--good-line)}
+      .card.is-bad{border-color:var(--bad-line)}
+      .card-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+      .qnum{font-weight:900;font-size:13px;color:#fff;background:var(--accent);
+        border-radius:8px;padding:4px 10px;font-variant-numeric:tabular-nums}
+      .tag{font-size:12.5px;font-weight:700;color:var(--accent-strong);background:var(--accent-soft);
+        border-radius:99px;padding:4px 11px}
+      .tag.bank{color:var(--ink-faint);background:var(--surface-2)}
+      .tag.supplied{color:var(--amber);background:var(--amber-soft)}
+      .fb-note{margin-top:11px;font-size:13px;line-height:1.8;color:var(--amber);font-weight:700;
+        background:var(--amber-soft);border:1px dashed var(--amber);border-radius:10px;padding:8px 12px}
+      .verdict-badge{margin-inline-start:auto;font-size:13px;font-weight:900;opacity:0;transform:scale(.8);
+        transition:opacity .35s var(--ease),transform .35s var(--ease)}
+      .card.answered .verdict-badge{opacity:1;transform:scale(1)}
+      .verdict-badge.ok{color:var(--good)}
+      .verdict-badge.no{color:var(--bad)}
+      .qtext{direction:ltr;text-align:left;font-size:17.5px;line-height:1.55;font-weight:700;margin:0 0 16px}
+      .opts{display:grid;gap:9px}
+      .opt{direction:ltr;text-align:left;display:flex;align-items:flex-start;gap:11px;width:100%;
+        background:var(--surface);border:1.6px solid var(--line);border-radius:13px;
+        padding:12px 14px;min-height:50px;font-size:15.5px;line-height:1.45;color:var(--ink);
+        transition:border-color .25s var(--ease),background .25s var(--ease),transform .15s var(--ease),opacity .3s var(--ease)}
+      .opt:hover{border-color:var(--accent)}
+      .opt:active{transform:scale(.985)}
+      .opt .letter{flex:none;width:27px;height:27px;border-radius:8px;background:var(--surface-2);
+        color:var(--ink-soft);font-weight:900;font-size:13.5px;display:grid;place-items:center;margin-top:1px;
+        transition:background .25s var(--ease),color .25s var(--ease)}
+      .opt .mark{margin-inline-start:auto;flex:none;font-weight:900;font-size:17px;opacity:0;transform:scale(.6);
+        transition:opacity .3s var(--ease),transform .3s var(--ease)}
+      .card.answered .opt{cursor:default;pointer-events:none}
+      .card.answered .opt.dim{opacity:.48}
+      .opt.correct{background:var(--good-soft);border-color:var(--good)}
+      .opt.correct .letter{background:var(--good);color:#fff}
+      .opt.correct .mark{opacity:1;transform:scale(1);color:var(--good)}
+      .opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+      .opt.wrong .letter{background:var(--bad);color:#fff}
+      .opt.wrong .mark{opacity:1;transform:scale(1);color:var(--bad)}
+
+      /* ---------- Feedback (hidden until answered) ---------- */
+      .feedback{display:grid;grid-template-rows:0fr;opacity:0;transform:translateY(-6px);
+        transition:grid-template-rows .55s var(--ease),opacity .45s var(--ease) .08s,transform .55s var(--ease)}
+      .feedback.open{grid-template-rows:1fr;opacity:1;transform:translateY(0)}
+      .feedback-in{overflow:hidden;min-height:0}
+      .feedback-box{margin-top:16px;border-radius:13px;padding:15px 16px 13px;border:1px solid}
+      .feedback-box.ok{background:var(--good-soft);border-color:var(--good-line)}
+      .feedback-box.no{background:var(--bad-soft);border-color:var(--bad-line)}
+      .fb-verdict{font-weight:900;font-size:16px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+      .feedback-box.ok .fb-verdict{color:var(--good)}
+      .feedback-box.no .fb-verdict{color:var(--bad)}
+      .fb-label{font-size:12.5px;font-weight:900;color:var(--ink-soft);letter-spacing:.2px;margin:12px 0 4px}
+      .fb-label:first-of-type{margin-top:0}
+      .fb-model{direction:ltr;text-align:left;font-weight:700;font-size:15.5px;line-height:1.5;
+        background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 13px}
+      .fb-model .ml{color:var(--good);font-weight:900;margin-inline-end:7px}
+      .fb-exp{direction:rtl;text-align:right;font-size:15.5px;line-height:1.95;color:var(--ink);
+        background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+      .next-btn{margin-top:13px;border:0;background:transparent;color:var(--accent-strong);font-weight:800;
+        font-size:14.5px;padding:8px 4px;min-height:40px;transition:opacity .25s}
+      .next-btn:hover{text-decoration:underline}
+
+      /* ---------- Summary / empty ---------- */
+      .summary{display:none;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+        box-shadow:var(--shadow);padding:26px 22px;margin-top:22px;text-align:center}
+      .summary.show{display:block;animation:rise .6s var(--ease) both}
+      .summary .big{font-size:40px;font-weight:900;color:var(--accent-strong);font-variant-numeric:tabular-nums}
+      .summary p{color:var(--ink-soft);line-height:1.8;margin:8px 0 16px}
+      .cta{border:0;border-radius:12px;background:var(--accent);color:#fff;font-weight:800;font-size:15.5px;
+        padding:13px 22px;min-height:48px;margin:4px;box-shadow:0 6px 16px rgba(30,90,122,.3);
+        transition:transform .18s var(--ease)}
+      .cta:active{transform:scale(.96)}
+      .cta.ghost{background:var(--surface-2);color:var(--ink);box-shadow:none;border:1px solid var(--line)}
+
+      /* ---------- Exam 20 (random practice round) ---------- */
+      .exam-bar{margin-top:16px;background:var(--surface);border:1.6px solid var(--accent);border-radius:var(--radius);
+        box-shadow:var(--shadow-sm);padding:16px 18px;display:flex;align-items:center;gap:14px 16px;flex-wrap:wrap}
+      .exam-btn{border:0;border-radius:13px;background:var(--accent);color:#fff;font-weight:900;font-size:18px;
+        padding:14px 26px;min-height:54px;box-shadow:0 6px 16px rgba(30,90,122,.3);
+        transition:transform .18s var(--ease);flex:none}
+      .exam-btn:active{transform:scale(.96)}
+      .exam-bar p{margin:0;color:var(--ink-soft);font-size:14.5px;line-height:1.8;flex:1 1 240px}
+      .exam-banner{margin-top:14px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:13px;
+        padding:12px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+      .exam-banner span{font-weight:800;color:var(--accent-strong);font-size:14.5px;flex:1 1 220px;line-height:1.7}
+      .exam-banner button{border:1px solid var(--accent);background:var(--surface);color:var(--accent-strong);
+        border-radius:10px;padding:9px 13px;min-height:42px;font-weight:800;font-size:13.5px;
+        transition:transform .18s var(--ease)}
+      .exam-banner button:active{transform:scale(.96)}
+      .exam-banner button.primary{background:var(--accent);color:#fff}
+      .empty{display:none;text-align:center;color:var(--ink-soft);padding:56px 20px;line-height:1.9}
+      .empty.show{display:block;animation:rise .5s var(--ease) both}
+      footer{margin-top:34px;text-align:center;color:var(--ink-faint);font-size:13px;line-height:1.9}
+
+      /* ---------- Filters toggle (mobile) + floating nav ---------- */
+      .filters-toggle{display:none;width:100%;align-items:center;justify-content:space-between;gap:8px;
+        background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 14px;
+        min-height:46px;font-weight:800;font-size:14.5px;color:var(--accent-strong);box-shadow:var(--shadow-sm)}
+      .filters-toggle .chev{transition:transform .4s var(--ease);flex:none}
+      .controls.open .filters-toggle .chev{transform:rotate(180deg)}
+      .controls-body-in{min-height:0}
+      .fab-stack{position:fixed;bottom:18px;inset-inline-end:16px;z-index:40;display:flex;flex-direction:column;gap:10px}
+      .fab{width:50px;height:50px;border-radius:50%;border:1px solid var(--line);background:var(--accent);color:#fff;
+        display:none;place-items:center;box-shadow:0 8px 22px rgba(30,90,122,.35);
+        transition:transform .18s var(--ease),background .25s var(--ease)}
+      .fab.show{display:grid;animation:fabIn .45s var(--ease) both}
+      .fab:active{transform:scale(.92)}
+      @keyframes fabIn{from{opacity:0;transform:translateY(14px) scale(.9)}to{opacity:1;transform:none}}
+      .fab.last{background:var(--surface);color:var(--accent-strong)}
+      @keyframes flashRing{0%{box-shadow:0 0 0 0 rgba(30,90,122,.45)}100%{box-shadow:0 0 0 18px rgba(30,90,122,0)}}
+      .card.flash{animation:flashRing .9s var(--ease) 2}
+      @media (max-width:640px){
+        .controls{position:static}
+        .filters-toggle{display:flex}
+        .controls-body{display:none}
+        .controls.open .controls-body{display:block;animation:rise .45s var(--ease) both}
+        .fab-stack{bottom:14px;inset-inline-end:12px}
+      }
+
+      @media (max-width:560px){
+        .wrap{padding:0 12px 80px}
+        .card{padding:17px 15px 13px}
+        .qtext{font-size:16.5px}
+        .stat.pct{margin-inline-start:0}
+      }
+      /* ---------- Subject menu ---------- */
+      .menu-grid{display:grid;gap:16px;margin-top:20px}
+      @media(min-width:640px){.menu-grid{grid-template-columns:1fr 1fr}}
+      .subject-card{display:flex;flex-direction:column;align-items:flex-start;gap:9px;text-align:start;
+        background:var(--surface);border:1.6px solid var(--line);border-radius:var(--radius);
+        box-shadow:var(--shadow-sm);padding:22px 20px;min-height:210px;color:var(--ink);width:100%;
+        animation:rise .6s var(--ease) both;
+        transition:transform .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease)}
+      .subject-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--shadow)}
+      .subject-card:active{transform:scale(.98)}
+      .sc-code{font-weight:900;font-size:23px;color:var(--accent-strong);font-variant-numeric:tabular-nums}
+      .sc-name{font-weight:800;font-size:16.5px;line-height:1.55}
+      .sc-meta{font-size:13.5px;font-weight:700;color:var(--ink-soft)}
+      .sc-desc{font-size:14.5px;line-height:1.8;color:var(--ink-soft)}
+      .sc-prog{font-size:13px;font-weight:800;color:var(--amber)}
+      .sc-go{margin-top:auto;font-weight:900;color:var(--accent-strong);font-size:15px}
+      .back-btn{border:1px solid var(--line);background:var(--surface);color:var(--accent-strong);
+        border-radius:999px;padding:9px 16px;min-height:42px;font-weight:800;font-size:14px;
+        box-shadow:var(--shadow-sm);margin-bottom:14px;transition:transform .18s var(--ease)}
+      .back-btn:active{transform:scale(.96)}
+
+      /* ---------- Floating pill bottom nav (transparent corners) ---------- */
+      .pill-nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;
+        display:flex;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:999px;
+        padding:5px;box-shadow:0 10px 28px rgba(31,41,55,.18);max-width:calc(100vw - 24px)}
+      .pill-nav button{border:0;background:transparent;color:var(--ink-soft);font-weight:800;font-size:13.5px;
+        padding:10px 12px;min-height:42px;border-radius:999px;white-space:nowrap;
+        transition:background .25s var(--ease),color .25s var(--ease)}
+      .pill-nav button:hover{background:var(--surface-2)}
+      .pill-nav button:active{transform:scale(.95)}
+      .pill-nav button.home{color:var(--accent-strong)}
+      .pill-nav button.on{background:var(--accent-soft);color:var(--accent-strong)}
+      @media (max-width:560px){.pill-nav button{padding:10px 9px;font-size:12.5px}}
+
+      @media (prefers-reduced-motion: reduce){
+        *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+        html{scroll-behavior:auto}
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap" id="menuWrap">
+      <header>
+        <h1>بنك أسئلة <span class="en">IS 207 + CS 303</span></h1>
+        <p class="sub">ميدتيرم الخميس 19 نوفمبر — اختار المادة، وحل أسئلتها لوحدها: الإجابة النموذجية والشرح بالعربي بيظهروا تحت كل سؤال بعد ما تختار إجابة. الأسئلة بالإنجليزي زي ما هي في الكتاب والتدريب.</p>
+      </header>
+      <main class="menu-grid">
+        <button class="subject-card" data-subject="is207" style="animation-delay:60ms">
+          <span class="sc-code">IS 207</span>
+          <span class="sc-name">Web Technology — تكنولوجيا الويب</span>
+          <span class="sc-meta">79 سؤال · HTML · CSS · JavaScript · الويب</span>
+          <span class="sc-desc">أسئلة الكتاب (Practice Sheets) — HTML و CSS وأول أجزاء JavaScript.</span>
+          <span class="sc-prog" id="progIs207"></span>
+          <span class="sc-go">ابدأ التدريب ←</span>
+        </button>
+        <button class="subject-card" data-subject="cs303" style="animation-delay:140ms">
+          <span class="sc-code">CS 303</span>
+          <span class="sc-name">Advanced Operating Systems — نظم التشغيل المتقدمة</span>
+          <span class="sc-meta">20 سؤال · الجدولة · العمليات · Deadlock</span>
+          <span class="sc-desc">تدريب الميدتيرم — 12 اختيارات + 8 صح/غلط، من غير مقالي.</span>
+          <span class="sc-prog" id="progCs303"></span>
+          <span class="sc-go">ابدأ التدريب ←</span>
+        </button>
+      </main>
+      <footer>كل مادة ليها بنكها ونتيجتها لوحدها — الأسئلة مش مخلوطة ببعض. نتيجتك بتتحسب في الجلسة دي بس، ولو قفلت الصفحة وفتحتها هتبدأ من الأول.</footer>
+    </div>
+    <div class="wrap" id="quizWrap" style="display:none">
+      <header>
+        <button class="back-btn" id="backBtn">← قايمة المواد</button>
+        <h1 id="quizTitle">بنك أسئلة <span class="en">IS 207</span> — تكنولوجيا الويب</h1>
+        <p class="sub" id="quizSub">أسئلة الكتاب (Practice Sheets) — HTML و CSS وأول أجزاء JavaScript. اختار إجابة أي سؤال، وهيظهرلك على طول إذا كانت صح ولا غلط، مع الإجابة النموذجية وشرح بالعربي.</p>
+        <div class="stats" aria-live="polite">
+          <div class="stats-row">
+            <div class="stat"><b id="stDone">0</b><span>اتجاوب من <span id="stTotal">0</span></span></div>
+            <div class="stat good"><b id="stGood">0</b><span>صح ✓</span></div>
+            <div class="stat bad"><b id="stBad">0</b><span>غلط ✗</span></div>
+            <div class="stat pct"><b id="stPct">—</b><span>نسبة الصح</span></div>
+          </div>
+          <div class="bar"><i id="barFill"></i></div>
+          <div class="bar-note" id="barNote">لسه مبدأتش — اختار أول إجابة وابدأ التدريب.</div>
+        </div>
+      </header>
+
+      <div class="exam-bar">
+        <button class="exam-btn" id="exam20Btn">🎲 عشرين سؤال</button>
+        <p>كل ضغطة على الزرار بتجيبلك 20 سؤال عشوائي مختلفين من بنك المادة دي، بترتيب عشوائي — حلّهم كأنك في امتحان مصغّر، وأول ما تخلّص العشرين هتظهر نتيجتك وتقدر تراجع غلطاتك أو تجيب عشرين جداد.</p>
+      </div>
+
+      <div class="controls" id="controls">
+        <button class="filters-toggle" id="filtersToggle" aria-expanded="false" aria-controls="controlsBody">
+          <span>الفلاتر والبحث والمواضيع</span>
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="controls-body" id="controlsBody"><div class="controls-body-in">
+        <div class="row2">
+          <label class="search">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+            <input id="search" type="search" placeholder="دوّر في الأسئلة… (بالإنجليزي)" autocomplete="off" />
+          </label>
+          <button class="tool" id="shuffleBtn" title="ترتيب عشوائي للأسئلة">🔀 خلط</button>
+          <button class="tool" id="wrongBtn" style="display:none">الغلطات بس</button>
+          <button class="tool" id="resetBtn">↺ من الأول</button>
+        </div>
+        <div class="chips" id="chips"></div>
+        </div></div>
+      </div>
+
+      <div class="exam-banner" id="examBanner" style="display:none">
+        <span>أنت دلوقتي في وضع «عشرين سؤال» — دول 20 سؤال عشوائي للتدريب. خلّصهم وهتظهر نتيجتك تحت.</span>
+        <button class="primary" id="examAgainBtn">🎲 عشرين سؤال جداد</button>
+        <button id="exitExamBtn">عرض كل الأسئلة</button>
+      </div>
+      <div class="count-line" id="countLine"></div>
+      <main id="list"></main>
+      <div class="empty" id="empty">مفيش أسئلة مطابقة للفلتر ده.<br/>جرّب تغيّر البنك أو الموضوع أو كلمة البحث.</div>
+
+      <section class="summary" id="summary">
+        <div class="big" id="sumScore"></div>
+        <p id="sumText"></p>
+        <button class="cta" id="retryWrong" style="display:none">اتدرب على الغلطات بس</button>
+        <button class="cta" id="newExam20">🎲 عشرين سؤال جداد</button>
+        <button class="cta ghost" id="restartAll">ابدأ من الأول خالص</button>
+      </section>
+
+      <nav class="pill-nav" id="pillNav" style="display:none" aria-label="التنقل السريع">
+        <button class="home" id="navHome">🏠 الرئيسية</button>
+        <button id="navShuffle">🔀 خلط</button>
+        <button id="navWrong" style="display:none">الغلطات بس</button>
+        <button id="navExam">🎲 عشرين</button>
+        <button id="navTop">↑ لأعلى</button>
+      </nav>
+
+      <footer>الأسئلة من أسئلة الكتاب (Practice Sheets) لمادة IS 207 — 79 سؤال (HTML و CSS وأول أجزاء JavaScript)، وتدريب ميدتيرم CS 303 — 20 سؤال (12 اختيارات + 8 صح/غلط). الشروح مكتوبة بالعربي للتدريب مع الحفاظ على المصطلحات الإنجليزية زي ما هي.<br/>ملحوظة: سؤال 13 في IS 207 مفهومه الـ hypertext، والاختيارات مافيهاش الكلمة دي — الأقرب منها (c) HTML. والأسئلة 1–5 متكررة في 75–79 زي ما هي في الكتاب.<br/>نتيجتك بتتحسب في الجلسة دي بس، ولو قفلت الصفحة وفتحتها هتبدأ من الأول.</footer>
+    </div>
+
+    <script>
+var QUESTIONS = [{"id": "I01", "bank": "is207", "topic": "الويب والبروتوكولات", "q": "Common application layer protocols include:.......", "options": ["HTTP", "DNS", "FTP", "A,b,c"], "answer": 3, "explanation": "الـ HTTP والـ DNS والـ FTP التلاتة بروتوكولات طبقة التطبيقات، فالإجابة A,b,c."}, {"id": "I02", "bank": "is207", "topic": "HTML", "q": "....... Is not an Inline element in HTML.", "options": ["<h1>", "<i>", "<u>", "None of the Previous"], "answer": 0, "explanation": "الـ <h1> عنصر block مش inline، أما <i> و <u> فـ inline."}, {"id": "I03", "bank": "is207", "topic": "الويب والبروتوكولات", "q": "... opens link in a new window tab.", "options": ["src=\"_blank\"", "alt=\"_blank\"", "target=\"_self\"", "target=\"_blank\""], "answer": 3, "explanation": "الـ target=\"_blank\" بيفتح اللينك في تاب جديد، أما target=\"_self\" فبيفتحه في نفس التاب."}, {"id": "I04", "bank": "is207", "topic": "الويب والبروتوكولات", "q": "... maintains and maps the name of the website.", "options": ["HTTP", "DNS", "HTML", "Browsers"], "answer": 1, "explanation": "الـ DNS هو اللي بيحوّل اسم الموقع (الـ domain) لعنوان IP."}, {"id": "I05", "bank": "is207", "topic": "HTML", "q": "..... is used for creating clickable links.", "options": ["<link>", "<http>", "<cl>", "<a>"], "answer": 3, "explanation": "التاج <a> هو اللي بيعمل اللينك، أما <link> فبيربط ملفات زي الـ CSS."}, {"id": "I06", "bank": "is207", "topic": "CSS", "q": "... defines an internal style sheet.", "options": ["<script>", "<link>", "<class>", "<style>"], "answer": 3, "explanation": "الـ <style> بيعرّف internal stylesheet جوّه الصفحة، أما <link> فبيربط ملف CSS خارجي."}, {"id": "I07", "bank": "is207", "topic": "CSS", "q": "img[src] uses ... CSS selector", "options": ["class selector", "universe selector", "Id selector", "Attribute selector"], "answer": 3, "explanation": "الـ img[src] بيختار الصور اللي عندها attribute اسمه src، فده attribute selector."}, {"id": "I08", "bank": "is207", "topic": "CSS", "q": "Background-attachment is used to..", "options": ["control the scrolling of an image", "set the background color", "repeat the background image", "set the position of background"], "answer": 0, "explanation": "الـ background-attachment بيتحكم في سكرول صورة الخلفية: fixed بتثبتها و scroll بتتحرك مع الصفحة."}, {"id": "I09", "bank": "is207", "topic": "CSS", "q": "How can you include an external CSS file in an HTML document?", "options": ["<style src=\"styles.css\">", "<link rel=\"stylesheet\" href=\"styles.css\">", "<css href=\"styles.css\">", "<import stylesheet=\"styles.css\">"], "answer": 1, "explanation": "الملف الخارجي بيتربط بـ <link rel=\"stylesheet\" href=\"...\"> جوّه الـ <head>."}, {"id": "I10", "bank": "is207", "topic": "CSS", "q": "The list-style-image specifies...", "options": ["background-image", "image position", "arrange images", "marker image"], "answer": 3, "explanation": "الـ list-style-image بيحدد صورة الـ marker بتاع عناصر القايمة بدل النقطة أو الرقم."}, {"id": "I11", "bank": "is207", "topic": "الويب والبروتوكولات", "q": "........ is the address of a given unique resource on the Web.", "options": ["DNS", "HTTP", "URL", "Scheme"], "answer": 2, "explanation": "الـ URL هو عنوان أي مورد على الويب، زي https://example.com/page."}, {"id": "I12", "bank": "is207", "topic": "الويب والبروتوكولات", "q": "....... Is the type of category in which the owner domain is registered", "options": ["Scheme", "Domain", "Sub Domain", "Top level Domain"], "answer": 3, "explanation": "الـ Top level Domain هو فئة الدومين (.com و .edu و .org) اللي بيتسجل تحتها الدومين."}, {"id": "I13", "bank": "is207", "topic": "الويب والبروتوكولات", "q": "........ refers to the way in which Web pages (HTML documents) are linked together", "options": ["HTTP", "Text", "HTML", "Mark Up"], "answer": 2, "explanation": "المفهوم الصح هو الـ hypertext — الصفحات مترابطة بلينكات — بس الاختيارات مافيهاش الكلمة دي، والأقرب منها (c) HTML لأن اللينكات بتتعمل بتاج <a> في الـ HTML."}, {"id": "I14", "bank": "is207", "topic": "HTML", "q": "........Does not have a closing tag or any contents", "options": ["<P>", "<h1>", "<Img>", "<HTML>"], "answer": 2, "explanation": "الـ <img> عنصر void: مالهوش closing tag ولا محتوى جوّاه، أما <p> و <h1> و <html> فلازم يتقفلوا."}, {"id": "I15", "bank": "is207", "topic": "HTML", "q": "........ is not a block level element in HTML.", "options": ["<h1>", "<i>", "<p>", "None of the previous"], "answer": 1, "explanation": "الـ <i> عنصر inline، أما <h1> و <p> فـ block level."}, {"id": "I16", "bank": "is207", "topic": "HTML", "q": "...is the largest heading in HTML", "options": ["h1", "hr", "h6", "head"], "answer": 0, "explanation": "أكبر heading هو <h1>، و <h6> هو أصغر واحد."}, {"id": "I17", "bank": "is207", "topic": "CSS", "q": "... is styling HTML5 layout", "options": ["PhP", "Jquery", "Css", "All of the above"], "answer": 2, "explanation": "الـ CSS هو اللي بيعمل styling وتنسيق الصفحة، مش PHP ولا jQuery."}, {"id": "I18", "bank": "is207", "topic": "HTML", "q": "Metadata is contained in.....", "options": ["HTML tag", "Head tag", "Body tag", "Title tag"], "answer": 1, "explanation": "الـ metadata (زي <meta> و <title>) بتتحط جوّه الـ <head>."}, {"id": "I19", "bank": "is207", "topic": "HTML", "q": ".....is used to insert an image in html pages.", "options": ["<img url=\"htmllogo.jpg\" />", "<img alt=\"htmllogo.jpg\" />", "<img src=\"htmllogo.jpg\" />", "<img link=\"htmllogo.jpg\" />"], "answer": 2, "explanation": "الصورة بتتدرج بـ <img src=\"...\">، والـ src هو اللي فيه مسار الصورة."}, {"id": "I20", "bank": "is207", "topic": "HTML", "q": "...is used to create a text area in html.", "options": ["<Text>", "<textarea>", "<input type=\"text\">", "<input type=\"textarea\">"], "answer": 1, "explanation": "الـ <textarea> للنص الطويل متعدد الأسطر، أما <input type=\"text\"> فسطر واحد بس."}, {"id": "I21", "bank": "is207", "topic": "HTML", "q": "Which tag is used to create a numbered list in HTML?", "options": ["<Nl>", "<ol>", "<ul>", "<dl>"], "answer": 1, "explanation": "الـ <ol> هي الـ ordered list (مرقمة)، و <ul> نقط، و <dl> قايمة تعريفات."}, {"id": "I22", "bank": "is207", "topic": "CSS", "q": "...is used to link an external style sheet in the HTML file.", "options": ["<link rel=\"stylesheet\" href=\"style.css\" />", "<link rel=\"stylesheet\" src=\"style.css\" />", "<style rel=\"stylesheet\" src=\"style.css\" />", "<style rel=\"stylesheet\" link=\"style.css\"/>"], "answer": 0, "explanation": "الملف الخارجي بيتربط بـ <link rel=\"stylesheet\" href=\"style.css\"> — والـ href مش src."}, {"id": "I23", "bank": "is207", "topic": "CSS", "q": "...is used to embed css in html page", "options": ["<inline>", "<internal>", "<css>", "<style>"], "answer": 3, "explanation": "الـ CSS جوّه الصفحة بيتكتب بين <style>...<\/style> في الـ <head>."}, {"id": "I24", "bank": "is207", "topic": "HTML", "q": "....creates a dropdown list.", "options": ["<dropdown>", "<select>", "<input>", "<downlist>"], "answer": 1, "explanation": "الـ dropdown list بتتعمل بتاج <select>، والاختيارات جوّاها بتاج <option>."}, {"id": "I25", "bank": "is207", "topic": "الويب والبروتوكولات", "q": "The .com at the URL represents....", "options": ["Top-level domain", "Scheme", "Domain name", "Sub-domain"], "answer": 0, "explanation": "الـ .com ده top-level domain — فئة الدومين، مش اسم الدومين نفسه."}, {"id": "I26", "bank": "is207", "topic": "الويب والبروتوكولات", "q": "Relative URLs are used to ...", "options": ["link other pages within the same site", "link the same page with other sites", "link other pages with other sites", "does not link"], "answer": 0, "explanation": "الـ relative URL بيربط صفحات جوّه نفس الموقع من غير ما يكتب الدومين كامل."}, {"id": "I27", "bank": "is207", "topic": "JavaScript", "q": "...Can Change HTML Content.", "options": ["window.write", "getElementById", "console.log", "html.write"], "answer": 1, "explanation": "الـ document.getElementById(...) بيوصل للعنصر وبعدين تقدر تغيّر محتواه بـ innerHTML — أما console.log فبيطبع في الـ console بس."}, {"id": "I28", "bank": "is207", "topic": "JavaScript", "q": "....is used to access HTML elements", "options": ["getElementById()", "getElementbyId()", "getElementByid()", "None"], "answer": 0, "explanation": "الاسم بالظبط getElementById() — كابيتال I وكابيتال B و d صغيرة، أي تغيير في الكابيتال يبوّظها."}, {"id": "I29", "bank": "is207", "topic": "JavaScript", "q": "What is the output: var x = 55;   var y = \"0\";   console.log(x + y);", "options": ["55", "55\"0\"", "\"5\" \"5\" \"0\"", "\"550\""], "answer": 3, "explanation": "الـ 55 + \"0\" = \"550\": الجمع مع نص بيحوّل الرقم لنص ويلزقهم، فالناتج نص مش رقم."}, {"id": "I30", "bank": "is207", "topic": "الويب والبروتوكولات", "q": "....are form's method.", "options": ["GET,PULL", "GET,Post", "Get,Pop", "Get,Push"], "answer": 1, "explanation": "الـ form ليها طريقتين: GET و POST."}, {"id": "I31", "bank": "is207", "topic": "HTML", "q": "... define options in a drop-down list.", "options": ["<drop-down>", "<select>", "<option>", "<datalist>"], "answer": 2, "explanation": "الاختيارات جوّه الـ <select> بتتعرف بتاج <option>."}, {"id": "I32", "bank": "is207", "topic": "CSS", "q": "...is the CSS selector in the following sentence:   p, li, h1 { color: red;}", "options": ["P, li,h1", "color", "Red", "Color: Red"], "answer": 0, "explanation": "الـ selector هو الجزء اللي قبل القوس: p, li, h1 — أما color: red فدي الـ declaration."}, {"id": "I33", "bank": "is207", "topic": "CSS", "q": "...uses the ID selector", "options": ["#para1", ".center", "*{p}", "All of the above"], "answer": 0, "explanation": "الـ #para1 ده ID selector (الـ # للـ id)، أما .center فده class selector."}, {"id": "I34", "bank": "is207", "topic": "CSS", "q": "...is a grouping content element.", "options": ["hr", "br", "h1", "div"], "answer": 3, "explanation": "الـ <div> هو عنصر تجميع المحتوى (block container)، أما <hr> فخط أفقي و <br> سطر جديد."}, {"id": "I35", "bank": "is207", "topic": "JavaScript", "q": "Which one is a true syntax:", "options": ["let person={Name:'John',age: 30};", "var person={Name:John, age: 30};", "var person={\"Name\":John,age: 30}", "Al of the above"], "answer": 0, "explanation": "الصح بس (a): الـ 'John' لازم تبقى بين كوتس لأنها نص، وفي (b) و (c) الـ John من غير كوتس فالـ JavaScript هتدور على متغير اسمه John ومش هتلاقيه."}, {"id": "I36", "bank": "is207", "topic": "HTML", "q": "..is an alphabetic list starts with \"D\"", "options": ["<ol type = \"A\" start = \"4\">", "<nl type = \"A\" start = \"4\">", "<ul type = \"A\" start = \"4\">", "<ol type = \"A\" start = \"D\">"], "answer": 0, "explanation": "الـ start رقم مش حرف: 4 يعني الحرف الرابع في الأبجدية = D، والتاج الصح هو <ol> مش <ul> ولا <nl>."}, {"id": "I37", "bank": "is207", "topic": "JavaScript", "q": "To delete a color property of car object", "options": ["delete color.car", "pop car.color", "delete car.color", "pop color.car"], "answer": 2, "explanation": "الحذف من الـ object بـ delete object.property: delete car.color — أما pop فدي للمصفوفات بس."}, {"id": "I38", "bank": "is207", "topic": "JavaScript", "q": "To access an object method use...keyword to refer object.", "options": ["method", "this", "object", "Function"], "answer": 1, "explanation": "الـ this بتشاور على الـ object نفسه جوّه الـ method بتاعه."}, {"id": "I39", "bank": "is207", "topic": "HTML", "q": "....tag is used to specify page expiry, page author, list of keywords, and page description.", "options": ["Title", "Head", "Meta", "Style"], "answer": 2, "explanation": "تاج <meta> هو اللي بيحدد الـ expiry والـ author والـ keywords ووصف الصفحة."}, {"id": "I40", "bank": "is207", "topic": "JavaScript", "q": "... attribute of the <script> tag refers to the external script file path.", "options": ["<a>", "<link>", "<href>", "<src>"], "answer": 3, "explanation": "الـ src بتاع <script> هو اللي بيشاور على مسار ملف الـ JavaScript الخارجي."}, {"id": "I41", "bank": "is207", "topic": "CSS", "q": "To add more space outside of field text ,use......", "options": ["padding", "margin", "border", "width"], "answer": 1, "explanation": "الـ margin مسافة برّه العنصر، أما الـ padding فمسافة جوّه العنصر بين حدوده ومحتواه."}, {"id": "I42", "bank": "is207", "topic": "JavaScript", "q": "JavaScript code can be placed in .....", "options": ["<body>, <\/body>", "<meta>, <\/meta>", "<title>, <\/title>", "None"], "answer": 0, "explanation": "كود الـ JavaScript بيتحط في <script> جوّه الـ <body> (أو الـ <head>)، مش في <meta> ولا <title>."}, {"id": "I43", "bank": "is207", "topic": "JavaScript", "q": "To display javascript output in a box, use....", "options": ["Console.log", "Box.log", "Window.alert", "console.alert"], "answer": 2, "explanation": "الـ window.alert() بيعرض الناتج في صندوق منبثق، أما console.log فبيطبع في الـ console بس."}, {"id": "I44", "bank": "is207", "topic": "HTML", "q": "Which HTML tag is used to define a hyperlink?", "options": ["<link>", "<a>", "<hyperlink>", "<url>"], "answer": 1, "explanation": "الـ hyperlink بيتعمل بتاج <a> مع href، أما <link> فبيربط ملفات خارجية زي الـ CSS."}, {"id": "I45", "bank": "is207", "topic": "HTML", "q": "Which HTML tag defines a large heading?", "options": ["<header>", "<h1>", "<main>", "<big>"], "answer": 1, "explanation": "أكبر heading هو <h1>، أما <header> فده تاج بنية مش heading."}, {"id": "I46", "bank": "is207", "topic": "HTML", "q": "What does the <hr /> element represent in HTML?", "options": ["Horizontal rule", "Header", "Hyperlink reference", "Heading row"], "answer": 0, "explanation": "الـ <hr> يعني horizontal rule — خط أفقي بيفصل بين أجزاء الصفحة."}, {"id": "I47", "bank": "is207", "topic": "HTML", "q": "What are the two required attributes of the <img> tag?", "options": ["title and caption", "href and alt", "src and alt", "link and description"], "answer": 2, "explanation": "الـ <img> لازم ليه src (مسار الصورة) و alt (نص بديل لو الصورة مظهرتش)."}, {"id": "I48", "bank": "is207", "topic": "HTML", "q": "How can an image be used as a link in HTML?", "options": ["<a src=\"image.jpg\">Link<\/a>", "<a> <img src=\"image.jpg\" alt=\"Link\"> <\/a>", "<a href=\"image.jpg\">Link<\/a>", "<img href=\"image.jpg\" alt=\"Link\">"], "answer": 1, "explanation": "الصورة تبقى لينك لما تحط <img> جوّه <a>: <a><img src=\"image.jpg\" alt=\"Link\"><\/a>."}, {"id": "I49", "bank": "is207", "topic": "HTML", "q": "What does the <a> tag's target attribute define in HTML?", "options": ["Font size", "Location to open the linked document", "Color of the linked text", "Width of the linked image"], "answer": 1, "explanation": "الـ target بيحدد مكان فتح اللينك: _blank في تاب جديد و _self في نفس التاب."}, {"id": "I50", "bank": "is207", "topic": "HTML", "q": "How do you represent the first item in an ordered list?", "options": ["<il>", "<li>", "<ol>", "<ul>"], "answer": 1, "explanation": "كل item في أي قايمة بيتعمل بتاج <li>، والـ <ol> هو القايمة نفسها."}, {"id": "I51", "bank": "is207", "topic": "HTML", "q": "What tag is used to define a table row in HTML?", "options": ["<row>", "<tr>", "<td>", "<th>"], "answer": 1, "explanation": "صف الجدول <tr> (table row)، والخلية <td>، وعنوان العمود <th>."}, {"id": "I52", "bank": "is207", "topic": "HTML", "q": "What tag is used to define a table cell in HTML?", "options": ["<tc>", "<td>", "<cell>", "<th>"], "answer": 1, "explanation": "خلية الجدول <td> (table data)، أما <th> فخلية عنوان (header cell)."}, {"id": "I53", "bank": "is207", "topic": "HTML", "q": "What HTML tag is used to create a text input field?", "options": ["<textfield>", "<input type=\"text\">", "<textinput>", "<textbox>"], "answer": 1, "explanation": "حقل النص بيتعمل بـ <input type=\"text\">."}, {"id": "I54", "bank": "is207", "topic": "HTML", "q": "How is a password input field created in an HTML form?", "options": ["<input type=\"password\">", "<password>", "<secret>", "<input type=\"secret\">"], "answer": 0, "explanation": "حقل الباسورد بيتعمل بـ <input type=\"password\"> — الحروف بتظهر نقط."}, {"id": "I55", "bank": "is207", "topic": "CSS", "q": "Which selector is used to select all elements with a specific class?", "options": ["#class", ".class", "*class*", "class:"], "answer": 1, "explanation": "الـ class selector بيبدأ بنقطة: .class — أما # فدي للـ id."}, {"id": "I56", "bank": "is207", "topic": "CSS", "q": "Which value of the `background-repeat` property will repeat an image both horizontally and vertically?", "options": ["repeat-x", "repeat-y", "no-repeat", "repeat"], "answer": 3, "explanation": "الـ repeat بتكرر الصورة أفقي وعمودي، أما repeat-x فأفقي بس و repeat-y فعمودي بس."}, {"id": "I57", "bank": "is207", "topic": "HTML", "q": "The ........ is the ideal way to present a glossary, list of terms and the description of each term.", "options": ["dt", "dl", "ul", "ol"], "answer": 1, "explanation": "قايمة المصطلحات والتعريفات بتتعمل بـ <dl> (description list)، وجوّاها <dt> للمصطلح و <dd> للوصف."}, {"id": "I58", "bank": "is207", "topic": "HTML", "q": "The ..........attribute defines space between table cells.", "options": ["cellpadding", "cellborder", "cellspacing", "none"], "answer": 2, "explanation": "الـ cellspacing = المسافة بين الخلايا وبعضها — متلخبطهاش مع الـ cellpadding اللي جوّه الخلية."}, {"id": "I59", "bank": "is207", "topic": "HTML", "q": "The ........... attribute represents the distance between cell borders and the content within a cell.", "options": ["cellpadding", "cellborder", "cellspacing", "none"], "answer": 0, "explanation": "الـ cellpadding = المسافة بين حدود الخلية والمحتوى اللي جوّاها — عكس الـ cellspacing اللي بين الخلايا."}, {"id": "I60", "bank": "is207", "topic": "HTML", "q": "...........attribute merge two or more columns into a single column in html tables.", "options": ["Colmerge", "colspan", "rowmerge", "rowspan"], "answer": 1, "explanation": "الـ colspan بيدمج أعمدة (col = column)، أما rowspan فبيدمج صفوف."}, {"id": "I61", "bank": "is207", "topic": "HTML", "q": "...........attribute merge two or more rows in html tables.", "options": ["Colmerge", "colspan", "rowmerge", "rowspan"], "answer": 3, "explanation": "الـ rowspan بيدمج صفوف (row = صف)، أما colspan فبيدمج أعمدة."}, {"id": "I62", "bank": "is207", "topic": "HTML", "q": "...................element is used to insert a scrolling area of text.", "options": ["textarea", "scrollarea", "marquee", "none"], "answer": 2, "explanation": "الـ <marquee> هو اللي بيعمل نص متحرك (scrolling)، أما <textarea> فحقل إدخال نص."}, {"id": "I63", "bank": "is207", "topic": "HTML", "q": "................is not considered as a form control.", "options": ["Check box", "Radio button", "Clickable button", "Clickable link"], "answer": 3, "explanation": "الـ clickable link مش form control — أما الـ checkbox والـ radio والـ button فكلهم form controls."}, {"id": "I64", "bank": "is207", "topic": "HTML", "q": "............... is used to get input long text content.", "options": ["Check box", "Data list", "Text area", "Reset button"], "answer": 2, "explanation": "النص الطويل بيتاخد بـ <textarea>، أما <input type=\"text\"> فسطر واحد بس."}, {"id": "I65", "bank": "is207", "topic": "CSS", "q": "background-repeat property will repeat ......... vertically by default.", "options": ["paragraph", "heading", "form", "image"], "answer": 3, "explanation": "الـ background-repeat بيكرر صورة الخلفية (image) — والقيمة الافتراضية repeat بتكررها أفقي وعمودي."}, {"id": "I66", "bank": "is207", "topic": "CSS", "q": "The ............attribute specifies an image for the marker rather than a bullet point or number.", "options": ["marker", "image", "list-style-image", "bullet"], "answer": 2, "explanation": "الـ list-style-image بيحدد صورة للـ marker بتاع عناصر القايمة بدل النقطة أو الرقم."}, {"id": "I67", "bank": "is207", "topic": "JavaScript", "q": "The javascript code is inserted between ............tags.", "options": ["<java>..<\/java>", "<javascript>...<\/javascript>", "<script>...<\/script>", "<js>...<\/js>"], "answer": 2, "explanation": "كود الـ JavaScript بيتكتب بين <script> و <\/script> — مفيش تاج اسمه <javascript>."}, {"id": "I68", "bank": "is207", "topic": "JavaScript", "q": "To add an element to the end of an array, you use the ............ method", "options": ["Unshift()", "Pop()", "Shift()", "push()"], "answer": 3, "explanation": "الـ push() بيضيف في الآخر، و unshift() بيضيف في الأول — احفظهم: push آخر، unshift أول."}, {"id": "I69", "bank": "is207", "topic": "JavaScript", "q": "To add an element to the beginning of an array, you use the........ method", "options": ["Unshift()", "Pop()", "Shift()", "push()"], "answer": 0, "explanation": "الـ unshift() بيضيف في الأول، أما push() فبيضيف في الآخر."}, {"id": "I70", "bank": "is207", "topic": "JavaScript", "q": "To remove an element from the end of an array, you use ........method.", "options": ["Unshift()", "Pop()", "Shift()", "push()"], "answer": 1, "explanation": "الـ pop() بيشيل من الآخر، و shift() بيشيل من الأول — pop آخر، shift أول."}, {"id": "I71", "bank": "is207", "topic": "JavaScript", "q": "To remove an element from the beginning of an array, you use the .........method.", "options": ["Unshift()", "Pop()", "Shift()", "push()"], "answer": 2, "explanation": "الـ shift() بيشيل من الأول، أما pop() فبيشيل من الآخر."}, {"id": "I72", "bank": "is207", "topic": "JavaScript", "q": "let x = 5;  let z = x ** 2;  x ** y produces the same result as ..........", "options": ["Math.pow(x,y)", "X multiply by Y", "X by 2Y", "none"], "answer": 0, "explanation": "الـ ** هو operator الأس، و x ** y = Math.pow(x,y) — مش ضرب ولا ضرب في 2."}, {"id": "I73", "bank": "is207", "topic": "JavaScript", "q": "For debugging purposes, you can call the ......... method in the browser to display data.", "options": ["Window.alert", "console.log", "inner.HTML", "getElementById"], "answer": 1, "explanation": "الـ console.log() بيطبع الداتا في الـ console للـ debugging، أما window.alert فبيطلع صندوق منبثق."}, {"id": "I74", "bank": "is207", "topic": "JavaScript", "q": "...................allows you to add interactivity to a web page.", "options": ["html", "css", "javscript", "none"], "answer": 2, "explanation": "الـ JavaScript هي اللي بتضيف التفاعلية للصفحة — الـ HTML بنية والـ CSS تنسيق بس."}, {"id": "I75", "bank": "is207", "topic": "الويب والبروتوكولات", "q": "Common application layer protocols include:.......", "options": ["HTTP", "DNS", "FTP", "A,b,c"], "answer": 3, "explanation": "الـ HTTP والـ DNS والـ FTP التلاتة بروتوكولات طبقة التطبيقات."}, {"id": "I76", "bank": "is207", "topic": "HTML", "q": "....... Is not an Inline element in HTML.", "options": ["<h1>", "<i>", "<u>", "None of the Previous"], "answer": 0, "explanation": "الـ <h1> عنصر block مش inline."}, {"id": "I77", "bank": "is207", "topic": "الويب والبروتوكولات", "q": "... opens link in a new window tab.", "options": ["src=\"_blank\"", "alt=\"_blank\"", "target=\"_self\"", "target=\"_blank\""], "answer": 3, "explanation": "الـ target=\"_blank\" بيفتح اللينك في تاب جديد."}, {"id": "I78", "bank": "is207", "topic": "الويب والبروتوكولات", "q": "... maintains and maps the name of the website.", "options": ["HTTP", "DNS", "HTML", "Browsers"], "answer": 1, "explanation": "الـ DNS هو اللي بيحوّل اسم الموقع لعنوان IP."}, {"id": "I79", "bank": "is207", "topic": "HTML", "q": "..... is used for creating clickable links.", "options": ["<link>", "<http>", "<cl>", "<a>"], "answer": 3, "explanation": "التاج <a> هو اللي بيعمل اللينك."}, {"id": "C01", "bank": "cs303", "topic": "الجدولة", "q": "P1 (arrival 0, burst 8), P2 (arrival 1, burst 4), P3 (arrival 2, burst 9), P4 (arrival 3, burst 5). What is the average waiting time under SRTF?", "options": ["5.5", "6.5", "7.25", "8"], "answer": 1, "explanation": "الـ Gantt: P1 0–1، P2 1–5، P4 5–10، P1 10–17، P3 17–26. أوقات الانتظار: 9 و 0 و 15 و 2، المتوسط = 26/4 = 6.5."}, {"id": "C02", "bank": "cs303", "topic": "الجدولة", "q": "Round Robin, quantum = 2. P1 (arrival 0, burst 5), P2 (arrival 0, burst 3). What is the average waiting time?", "options": ["2.5", "3", "3.5", "4"], "answer": 2, "explanation": "الـ Gantt: P1 0–2، P2 2–4، P1 4–6، P2 6–7، P1 7–8. الانتظار: P1 = 3 و P2 = 4، المتوسط = 7/2 = 3.5."}, {"id": "C03", "bank": "cs303", "topic": "الجدولة", "q": "Which scheduling algorithm can cause starvation of long processes?", "options": ["FCFS", "SJF", "Round Robin", "None of them"], "answer": 1, "explanation": "الـ SJF بيفضّل العمليات القصيرة، فالعملية الطويلة ممكن تستنى للأبد لو العمليات القصيرة بتتابع — وده الـ starvation."}, {"id": "C04", "bank": "cs303", "topic": "الجدولة", "q": "A job arrives at 0, first runs at 3, finishes at 12, and has a burst of 6. What is its response time?", "options": ["3", "6", "9", "12"], "answer": 0, "explanation": "الـ response time = أول مرة يشتغل − وقت الوصول = 3 − 0 = 3. متلخبطهاش مع الـ waiting (turnaround − burst = 12 − 6 = 6) ولا الـ turnaround (12)."}, {"id": "C05", "bank": "cs303", "topic": "الجدولة", "q": "Which algorithm suffers most from the convoy effect?", "options": ["FCFS", "SJF", "Round Robin", "SRTF"], "answer": 0, "explanation": "في الـ FCFS العملية الطويلة اللي في الأول بتوقف كل اللي وراها — وده الـ convoy effect."}, {"id": "C06", "bank": "cs303", "topic": "حالات العمليات", "q": "A process in the Blocked state is:", "options": ["Executing on the CPU", "Waiting for an event such as I/O", "Waiting to be assigned to a processor", "Terminated"], "answer": 1, "explanation": "الـ Blocked يعني مستني حدث زي الـ I/O يخلص. اللي مستني processor بس هو الـ Ready، واللي شغال على الـ CPU هو الـ Running."}, {"id": "C07", "bank": "cs303", "topic": "العمليات: fork و exec", "q": "A program calls fork() twice in a row, then prints \"X\". How many \"X\" lines appear?", "options": ["2", "3", "4", "6"], "answer": 2, "explanation": "كل fork بيضاعف عدد العمليات: 2^2 = 4 عمليات، وكل واحدة بتطبع X."}, {"id": "C08", "bank": "cs303", "topic": "حالات العمليات", "q": "When a process finishes its I/O wait, it moves to the:", "options": ["Running", "Ready", "Terminated", "New"], "answer": 1, "explanation": "بعد ما الـ I/O يخلص بيرجع Ready، وعمره ما يروح Running على طول — الـ Running بتيجي من الـ Ready بس عن طريق الـ dispatcher."}, {"id": "C09", "bank": "cs303", "topic": "الأقسام الحرجة", "q": "Which is NOT a requirement for a solution to the critical-section problem?", "options": ["Mutual exclusion", "Progress", "Bounded waiting", "Preemption"], "answer": 3, "explanation": "الشروط التلاتة هي mutual exclusion و progress و bounded waiting — والـ preemption مش منهم."}, {"id": "C10", "bank": "cs303", "topic": "الأقسام الحرجة", "q": "A race condition occurs when:", "options": ["Two processes run on different CPUs", "The result depends on the timing or order of process execution", "A process waits for I/O", "The memory is full"], "answer": 1, "explanation": "الـ race condition يعني النتيجة بتعتمد على ترتيب وتوقيت تنفيذ العمليات — لأنهم بيشاركوا نفس الداتا من غير حماية."}, {"id": "C11", "bank": "cs303", "topic": "قانون أمدال", "q": "50% of a program is serial. What is the speedup (Amdahl's law) with 4 cores?", "options": ["1.6", "2", "2.5", "4"], "answer": 0, "explanation": "قانون أمدال: 1 / (0.5 + 0.5/4) = 1 / 0.625 = 1.6. الجزء الـ serial هو اللي بيحدّ السرعة."}, {"id": "C12", "bank": "cs303", "topic": "الجمود (Deadlock)", "q": "Imposing a fixed order on all resources breaks which deadlock condition?", "options": ["Mutual exclusion", "Hold and wait", "Circular wait", "No preemption"], "answer": 2, "explanation": "ترتيب ثابت للموارد بيمنع الـ circular wait — مفيش دايرة طلبات تتكون لو الكل بيطلب بنفس الترتيب."}, {"id": "C13", "bank": "cs303", "topic": "الجدولة", "q": "SJF is optimal because it gives the minimum average turnaround time.", "options": ["True", "False"], "answer": 1, "explanation": "غلط — الـ SJF هو الـ optimal لأنه بيدي أقل average WAITING time، مش turnaround."}, {"id": "C14", "bank": "cs303", "topic": "الجدولة", "q": "Increasing the Round Robin time quantum always decreases the average waiting time.", "options": ["True", "False"], "answer": 1, "explanation": "غلط — كل ما الـ quantum يكبر الـ RR بيقرب من الـ FCFS، والانتظار ممكن يزيد مش يقل."}, {"id": "C15", "bank": "cs303", "topic": "الجدولة", "q": "Under preemptive SJF (SRTF), a newly arriving process with a shorter remaining time preempts the running process.", "options": ["True", "False"], "answer": 0, "explanation": "صح — دي فكرة الـ preemptive SJF: أي عملية جديدة بوقت متبقّي أقل بتوقف اللي شغالة وتاخد الـ CPU."}, {"id": "C16", "bank": "cs303", "topic": "العمليات: fork و exec", "q": "A zombie process is still running and consuming CPU.", "options": ["True", "False"], "answer": 1, "explanation": "غلط — الـ zombie مات خلاص ومش بيستهلك CPU، اللي فاضل بس مدخله في جدول العمليات لحد ما الأب يعمل wait(). احفظها: zombie = ابن ميت."}, {"id": "C17", "bank": "cs303", "topic": "العمليات: fork و exec", "q": "After a successful exec, the next line of the old program runs.", "options": ["True", "False"], "answer": 1, "explanation": "غلط — الـ exec الناجح مبييرجعش أبدًا: نفس الـ PID بيكمل بالبرنامج الجديد، والسطر اللي بعد الـ exec مبيتنفذش."}, {"id": "C18", "bank": "cs303", "topic": "الأقسام الحرجة", "q": "Two threads incrementing a shared counter without a lock can lose updates because the increment is not atomic.", "options": ["True", "False"], "answer": 0, "explanation": "صح — الـ increment تلات خطوات (اقرأ، زوّد، اكتب)، و thread تاني ممكن يدخل في النص ويضيّع تحديث."}, {"id": "C19", "bank": "cs303", "topic": "التزامن", "q": "Concurrency means tasks execute at exactly the same instant.", "options": ["True", "False"], "answer": 1, "explanation": "غلط — ده الـ parallelism. الـ concurrency يعني المهام بتتقدم بالتناوب، مش لازم في نفس اللحظة."}, {"id": "C20", "bank": "cs303", "topic": "الجمود (Deadlock)", "q": "Deadlock can occur only if all four conditions hold at the same time: mutual exclusion, hold-and-wait, no preemption, circular wait.", "options": ["True", "False"], "answer": 0, "explanation": "صح — لازم الشروط الأربعة تتجمع مع بعض عشان يحصل deadlock، وكسر أي شرط منهم بيمنعه."}];
+      var LETTERS = ["A","B","C","D"];
+      var BANK_NAMES = { is207: "IS 207", cs303: "CS 303" };
+
+      var state = {
+        bank: "is207",
+        topic: "all",
+        query: "",
+        wrongOnly: false,
+        onlyIds: null,
+        examMode: false,
+        shuffled: false,
+        order: QUESTIONS.map(function(q){ return q.id; }),
+        answers: {}, // id -> chosen index
+        lastId: null // last answered question id
+      };
+      var byId = {};
+      QUESTIONS.forEach(function(q){ byId[q.id] = q; });
+
+      var listEl = document.getElementById("list");
+      var chipsEl = document.getElementById("chips");
+      var emptyEl = document.getElementById("empty");
+      var summaryEl = document.getElementById("summary");
+      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function visibleQuestions(){
+        var wrongIds = null;
+        if (state.wrongOnly){
+          wrongIds = {};
+          Object.keys(state.answers).forEach(function(id){
+            if (state.answers[id] !== byId[id].answer) wrongIds[id] = true;
+          });
+        }
+        return state.order.map(function(id){ return byId[id]; }).filter(function(q){
+          if (state.onlyIds && !state.onlyIds[q.id]) return false;
+          if (state.bank !== "all" && q.bank !== state.bank) return false;
+          if (state.topic !== "all" && q.topic !== state.topic) return false;
+          if (wrongIds && !wrongIds[q.id]) return false;
+          if (state.query){
+            var hay = (q.q + " " + q.options.join(" ")).toLowerCase();
+            if (hay.indexOf(state.query) === -1) return false;
+          }
+          return true;
+        });
+      }
+
+      function topicsForBank(){
+        var seen = [], set = {};
+        QUESTIONS.forEach(function(q){
+          if (state.bank !== "all" && q.bank !== state.bank) return;
+          if (!set[q.topic]){ set[q.topic] = true; seen.push(q.topic); }
+        });
+        return seen;
+      }
+
+      function renderChips(){
+        var topics = topicsForBank();
+        if (topics.indexOf(state.topic) === -1) state.topic = "all";
+        var html = '<button class="chip' + (state.topic === "all" ? " on" : "") + '" data-topic="all">كل المواضيع</button>';
+        topics.forEach(function(t){
+          html += '<button class="chip' + (state.topic === t ? " on" : "") + '" data-topic="' + t.replace(/"/g,"&quot;") + '">' + t + "</button>";
+        });
+        chipsEl.innerHTML = html;
+        Array.prototype.forEach.call(chipsEl.querySelectorAll(".chip"), function(ch){
+          ch.addEventListener("click", function(){
+            state.topic = ch.getAttribute("data-topic");
+            state.onlyIds = null;
+            state.examMode = false;
+            render();
+          });
+        });
+      }
+
+      function cardHTML(q, idx){
+        var chosen = state.answers[q.id];
+        var answered = chosen !== undefined;
+        var isGood = answered && chosen === q.answer;
+        var opts = q.options.map(function(opt, i){
+          var cls = "opt";
+          var mark = "";
+          if (answered){
+            if (i === q.answer){ cls += " correct"; mark = "✓"; }
+            else if (i === chosen){ cls += " wrong"; mark = "✗"; }
+            else { cls += " dim"; }
+          }
+          return '<button class="' + cls + '" data-q="' + q.id + '" data-i="' + i + '"' + (answered ? " disabled" : "") + '>' +
+            '<span class="letter">' + LETTERS[i] + '</span><span>' + escapeHTML(opt) + '</span>' +
+            '<span class="mark">' + mark + "</span></button>";
+        }).join("");
+        var fb = "";
+        if (answered){
+          var model = q.options[q.answer];
+          fb = '<div class="feedback open"><div class="feedback-in"><div class="feedback-box ' + (isGood ? "ok" : "no") + '">' +
+            '<p class="fb-verdict">' + (isGood ? "✓ إجابة صحيحة — أحسنت!" : "✗ مش صح — راجع الإجابة النموذجية") + "</p>" +
+            '<div class="fb-label">الإجابة النموذجية · Model Answer</div>' +
+            '<div class="fb-model"><span class="ml">' + LETTERS[q.answer] + ")</span>" + escapeHTML(model) + "</div>" +
+            '<div class="fb-label">الشرح · Explanation</div>' +
+            '<div class="fb-exp">' + escapeHTML(q.explanation) + "</div>" +
+            (q.supplied ? '<div class="fb-note">ملحوظة: السؤال ده كان في ملف البنك من غير إجابة نموذجية ولا شرح — الإجابة والشرح اللي فوق إجابة قياسية من المنهج للتدريب، مش من الملف.</div>' : "") +
+            '<button class="next-btn" data-next="' + q.id + '">السؤال اللي بعده ↓</button>' +
+            "</div></div></div>";
+        } else {
+          fb = '<div class="feedback"><div class="feedback-in"></div></div>';
+        }
+        return '<article class="card' + (answered ? " answered " + (isGood ? "is-good" : "is-bad") : "") + '" id="card-' + q.id + '" style="animation-delay:' + Math.min(idx, 10) * 45 + 'ms">' +
+          '<div class="card-top"><span class="qnum">سؤال ' + (idx + 1) + '</span>' +
+          '<span class="tag bank">' + BANK_NAMES[q.bank] + '</span>' +
+          '<span class="tag">' + escapeHTML(q.topic) + "</span>" +
+          (q.supplied ? '<span class="tag supplied">إجابة مُكمّلة</span>' : "") +
+          (answered ? '<span class="verdict-badge ' + (isGood ? "ok" : "no") + '">' + (isGood ? "✓ صح" : "✗ غلط") + "</span>" : "") +
+          "</div>" +
+          '<p class="qtext">' + escapeHTML(q.q) + "</p>" +
+          '<div class="opts">' + opts + "</div>" + fb +
+          "</article>";
+      }
+
+      function escapeHTML(s){
+        return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+      }
+
+      function render(){
+        renderChips();
+        updateExamUI();
+        var vis = visibleQuestions();
+        document.getElementById("countLine").textContent = vis.length ? ("ظاهر دلوقتي " + vis.length + " سؤال") : "";
+        listEl.innerHTML = vis.map(cardHTML).join("");
+        emptyEl.classList.toggle("show", vis.length === 0);
+        bindCards();
+        updateStats(vis);
+        updateFabs();
+      }
+
+      function bindCards(){
+        Array.prototype.forEach.call(listEl.querySelectorAll(".opt:not([disabled])"), function(btn){
+          btn.addEventListener("click", function(){ answer(btn.getAttribute("data-q"), parseInt(btn.getAttribute("data-i"), 10)); });
+        });
+        Array.prototype.forEach.call(listEl.querySelectorAll("[data-next]"), function(btn){
+          btn.addEventListener("click", function(){ goNext(btn.getAttribute("data-next")); });
+        });
+      }
+
+      function answer(id, i){
+        if (state.answers[id] !== undefined) return;
+        state.answers[id] = i;
+        state.lastId = id;
+        var q = byId[id];
+        var card = document.getElementById("card-" + id);
+        if (!card) return;
+        var isGood = i === q.answer;
+        card.classList.add("answered", isGood ? "is-good" : "is-bad");
+        var top = card.querySelector(".card-top");
+        var badge = document.createElement("span");
+        badge.className = "verdict-badge " + (isGood ? "ok" : "no");
+        badge.textContent = isGood ? "✓ صح" : "✗ غلط";
+        top.appendChild(badge);
+        Array.prototype.forEach.call(card.querySelectorAll(".opt"), function(btn, bi){
+          btn.disabled = true;
+          var mark = btn.querySelector(".mark");
+          if (bi === q.answer){ btn.classList.add("correct"); mark.textContent = "✓"; }
+          else if (bi === i){ btn.classList.add("wrong"); mark.textContent = "✗"; }
+          else { btn.classList.add("dim"); }
+        });
+        var fb = card.querySelector(".feedback");
+        fb.querySelector(".feedback-in").innerHTML =
+          '<div class="feedback-box ' + (isGood ? "ok" : "no") + '">' +
+          '<p class="fb-verdict">' + (isGood ? "✓ إجابة صحيحة — أحسنت!" : "✗ مش صح — راجع الإجابة النموذجية") + "</p>" +
+          '<div class="fb-label">الإجابة النموذجية · Model Answer</div>' +
+          '<div class="fb-model"><span class="ml">' + LETTERS[q.answer] + ")</span>" + escapeHTML(q.options[q.answer]) + "</div>" +
+          '<div class="fb-label">الشرح · Explanation</div>' +
+          '<div class="fb-exp">' + escapeHTML(q.explanation) + "</div>" +
+          (q.supplied ? '<div class="fb-note">ملحوظة: السؤال ده كان في ملف البنك من غير إجابة نموذجية ولا شرح — الإجابة والشرح اللي فوق إجابة قياسية من المنهج للتدريب، مش من الملف.</div>' : "") +
+          '<button class="next-btn" data-next="' + q.id + '">السؤال اللي بعده ↓</button>' +
+          "</div>";
+        // force reflow so the expand animation runs smoothly
+        void fb.offsetHeight;
+        fb.classList.add("open");
+        var nb = fb.querySelector("[data-next]");
+        nb.addEventListener("click", function(){ goNext(id); });
+        updateStats(visibleQuestions());
+        updateWrongBtn();
+        updateFabs();
+      }
+
+      function goNext(id){
+        var vis = visibleQuestions();
+        var pos = -1;
+        vis.forEach(function(q, i){ if (q.id === id) pos = i; });
+        for (var k = pos + 1; k < vis.length; k++){
+          if (state.answers[vis[k].id] === undefined){
+            var el = document.getElementById("card-" + vis[k].id);
+            if (el) el.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
+            return;
+          }
+        }
+        summaryEl.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
+      }
+
+      function updateStats(vis){
+        var done = 0, good = 0;
+        vis.forEach(function(q){
+          var a = state.answers[q.id];
+          if (a !== undefined){ done++; if (a === q.answer) good++; }
+        });
+        var totalAll = Object.keys(state.answers).length;
+        document.getElementById("stDone").textContent = done;
+        document.getElementById("stTotal").textContent = vis.length;
+        document.getElementById("stGood").textContent = good;
+        document.getElementById("stBad").textContent = done - good;
+        document.getElementById("stPct").textContent = done ? Math.round(good / done * 100) + "٪" : "—";
+        document.getElementById("barFill").style.width = vis.length ? (done / vis.length * 100) + "%" : "0%";
+        var note = document.getElementById("barNote");
+        if (done === 0) note.textContent = "لسه مبدأتش — اختار أول إجابة وابدأ التدريب.";
+        else if (done < vis.length) note.textContent = "فاضل " + (vis.length - done) + " سؤال في العرض الحالي. كمّل!";
+        else note.textContent = "خلصت كل الأسئلة اللي ظاهرة دلوقتي 🎉";
+        // summary
+        if (vis.length && done === vis.length){
+          document.getElementById("sumScore").textContent = good + " / " + vis.length;
+          var pct = Math.round(good / vis.length * 100);
+          document.getElementById("sumText").textContent =
+            pct >= 85 ? "ممتاز! نتيجتك " + pct + "٪ — انت جاهز تقريبًا للميدتيرم. راجع الغلطات بس وخلاص." :
+            pct >= 60 ? "كويس — نتيجتك " + pct + "٪. ركّز على الغلطات وارجع حلّها تاني وهتثبت." :
+                        "نتيجتك " + pct + "٪ — عادي، ده وقت التدريب. راجع شروح الغلطات واتدرب عليها تاني.";
+          document.getElementById("retryWrong").style.display = (done - good) > 0 ? "" : "none";
+          summaryEl.classList.add("show");
+        } else {
+          summaryEl.classList.remove("show");
+        }
+        void totalAll;
+      }
+
+      function updateWrongBtn(){
+        var wrong = Object.keys(state.answers).filter(function(id){ return state.answers[id] !== byId[id].answer; });
+        var btn = document.getElementById("wrongBtn");
+        btn.style.display = wrong.length ? "" : "none";
+        btn.textContent = "الغلطات بس (" + wrong.length + ")";
+        btn.classList.toggle("on", state.wrongOnly);
+        var navWrong = document.getElementById("navWrong");
+        if (navWrong){
+          navWrong.style.display = wrong.length ? "" : "none";
+          navWrong.textContent = "الغلطات بس (" + wrong.length + ")";
+          navWrong.classList.toggle("on", state.wrongOnly);
+        }
+      }
+
+      // ---- Controls ----
+      var searchTimer = null;
+      document.getElementById("search").addEventListener("input", function(e){
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(function(){
+          state.query = e.target.value.trim().toLowerCase();
+          render();
+        }, 220);
+      });
+      document.getElementById("shuffleBtn").addEventListener("click", function(){
+        for (var i = state.order.length - 1; i > 0; i--){
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = state.order[i]; state.order[i] = state.order[j]; state.order[j] = t;
+        }
+        state.shuffled = true;
+        this.classList.add("on");
+        render();
+        window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+      });
+      document.getElementById("wrongBtn").addEventListener("click", function(){
+        state.wrongOnly = !state.wrongOnly;
+        render();
+        updateWrongBtn();
+      });
+      function updateExamUI(){
+        var banner = document.getElementById("examBanner");
+        if (banner) banner.style.display = state.examMode ? "" : "none";
+      }
+
+      function startExam20(){
+        var pool = QUESTIONS.filter(function(q){ return q.bank === state.bank; }).map(function(q){ return q.id; });
+        for (var i = pool.length - 1; i > 0; i--){
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
+        }
+        var picked = pool.slice(0, Math.min(20, pool.length));
+        var set = {};
+        picked.forEach(function(id){ set[id] = true; });
+        state.onlyIds = set;
+        state.examMode = true;
+        state.topic = "all";
+        // Fresh exam round for THIS subject only — keep the other subject's score.
+        Object.keys(state.answers).forEach(function(id){
+          if (byId[id] && byId[id].bank === state.bank) delete state.answers[id];
+        });
+        state.query = "";
+        state.wrongOnly = false;
+        state.lastId = null;
+        state.order = picked.concat(pool.slice(picked.length)).concat(QUESTIONS.filter(function(q){ return q.bank !== state.bank; }).map(function(q){ return q.id; }));
+        document.getElementById("search").value = "";
+        render();
+        updateWrongBtn();
+        var banner = document.getElementById("examBanner");
+        if (banner) banner.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+      }
+
+      function exitExam(){
+        state.examMode = false;
+        state.onlyIds = null;
+        state.wrongOnly = false;
+        state.order = QUESTIONS.map(function(q){ return q.id; });
+        render();
+        updateWrongBtn();
+        window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+      }
+
+      function resetAll(){
+        Object.keys(state.answers).forEach(function(id){
+          if (byId[id] && byId[id].bank === state.bank) delete state.answers[id];
+        });
+        state.lastId = null;
+        state.wrongOnly = false;
+        state.onlyIds = null;
+        state.examMode = false;
+        state.order = QUESTIONS.map(function(q){ return q.id; });
+        state.shuffled = false;
+        document.getElementById("shuffleBtn").classList.remove("on");
+        render();
+        updateWrongBtn();
+        window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+      }
+      document.getElementById("resetBtn").addEventListener("click", resetAll);
+      document.getElementById("exam20Btn").addEventListener("click", startExam20);
+      document.getElementById("examAgainBtn").addEventListener("click", startExam20);
+      document.getElementById("newExam20").addEventListener("click", startExam20);
+      document.getElementById("exitExamBtn").addEventListener("click", exitExam);
+      document.getElementById("restartAll").addEventListener("click", resetAll);
+      document.getElementById("retryWrong").addEventListener("click", function(){
+        var wrongSet = {};
+        visibleQuestions().forEach(function(q){
+          if (state.answers[q.id] !== undefined && state.answers[q.id] !== q.answer){
+            wrongSet[q.id] = true;
+            delete state.answers[q.id];
+          }
+        });
+        if (!Object.keys(wrongSet).length) return;
+        state.onlyIds = wrongSet;
+        state.wrongOnly = false;
+        state.examMode = false;
+        render();
+        updateWrongBtn();
+        window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+      });
+
+      // ---- Subject menu + floating pill nav ----
+      var menuWrap = document.getElementById("menuWrap");
+      var quizWrap = document.getElementById("quizWrap");
+      var pillNav = document.getElementById("pillNav");
+      var quizTitle = document.getElementById("quizTitle");
+      var quizSub = document.getElementById("quizSub");
+      var SUBJECTS = {
+        is207: { code: "IS 207", ar: "تكنولوجيا الويب", count: 79,
+          sub: "أسئلة الكتاب (Practice Sheets) — HTML و CSS وأول أجزاء JavaScript. اختار إجابة أي سؤال، وهيظهرلك على طول إذا كانت صح ولا غلط، مع الإجابة النموذجية وشرح بالعربي." },
+        cs303: { code: "CS 303", ar: "نظم التشغيل المتقدمة", count: 20,
+          sub: "تدريب الميدتيرم — 12 اختيارات + 8 صح/غلط، من غير مقالي. اختار إجابة أي سؤال، وهيظهرلك على طول إذا كانت صح ولا غلط، مع الإجابة النموذجية وشرح بالعربي." }
+      };
+      function subjectProgress(id){
+        var total = QUESTIONS.filter(function(q){ return q.bank === id; }).length;
+        var done = 0, good = 0;
+        Object.keys(state.answers).forEach(function(aid){
+          if (byId[aid] && byId[aid].bank === id){ done++; if (state.answers[aid] === byId[aid].answer) good++; }
+        });
+        return done ? ("جاوبت " + done + " من " + total + " — صح " + good) : ("لسه مبدأتش — " + total + " سؤال");
+      }
+      function showMenu(){
+        quizWrap.style.display = "none";
+        menuWrap.style.display = "";
+        pillNav.style.display = "none";
+        document.getElementById("progIs207").textContent = subjectProgress("is207");
+        document.getElementById("progCs303").textContent = subjectProgress("cs303");
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
+      function openSubject(id){
+        var s = SUBJECTS[id];
+        state.bank = id;
+        state.topic = "all";
+        state.onlyIds = null;
+        state.examMode = false;
+        state.wrongOnly = false;
+        state.query = "";
+        if (state.order.length !== QUESTIONS.length){
+          state.order = QUESTIONS.map(function(q){ return q.id; });
+        }
+        document.getElementById("search").value = "";
+        quizTitle.innerHTML = 'بنك أسئلة <span class="en">' + s.code + '</span> — ' + s.ar;
+        quizSub.textContent = s.sub;
+        menuWrap.style.display = "none";
+        quizWrap.style.display = "";
+        pillNav.style.display = "";
+        render();
+        updateWrongBtn();
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
+      Array.prototype.forEach.call(document.querySelectorAll(".subject-card"), function(card){
+        card.addEventListener("click", function(){ openSubject(card.getAttribute("data-subject")); });
+      });
+      document.getElementById("backBtn").addEventListener("click", showMenu);
+      document.getElementById("navHome").addEventListener("click", showMenu);
+      document.getElementById("navShuffle").addEventListener("click", function(){ document.getElementById("shuffleBtn").click(); });
+      document.getElementById("navWrong").addEventListener("click", function(){ document.getElementById("wrongBtn").click(); });
+      document.getElementById("navExam").addEventListener("click", startExam20);
+      document.getElementById("navTop").addEventListener("click", function(){
+        window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+      });
+      function updateFabs(){
+        if (!pillNav) return;
+        pillNav.style.display = (quizWrap.style.display === "none") ? "none" : "";
+      }
+      var controlsEl = document.getElementById("controls");
+      var filtersToggle = document.getElementById("filtersToggle");
+      filtersToggle.addEventListener("click", function(){
+        var open = controlsEl.classList.toggle("open");
+        filtersToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      render();
+      showMenu();
+    </script>
+  </body>
+</html>
