@@ -1368,5 +1368,809 @@
   ],
   "answer": 0,
   "explanation": "صح — لازم الشروط الأربعة تتجمع مع بعض عشان يحصل deadlock، وكسر أي شرط منهم بيمنعه."
+ },
+ {
+  "id": "C21",
+  "bank": "cs303",
+  "topic": "العمليات والذاكرة",
+  "q": "Which section of a process’s address space grows dynamically toward lower physical memory addresses?",
+  "options": [
+   "Text",
+   "Data",
+   "Heap",
+   "Stack"
+  ],
+  "answer": 3,
+  "explanation": "الـ Stack بيكبر لتحت ناحية العناوين الأقل، والـ Heap بيكبر لفوق ناحية العناوين الأعلى."
+ },
+ {
+  "id": "C22",
+  "bank": "cs303",
+  "topic": "حالات العمليات",
+  "q": "In the 5-state process model, what state transition occurs when a running process issues an I/O request?",
+  "options": [
+   "Running → Ready",
+   "Running → Waiting",
+   "Waiting → Ready",
+   "Running → Terminated"
+  ],
+  "answer": 1,
+  "explanation": "لما عملية شغالة تطلب I/O بتتحول من Running لـ Waiting — ده تنازل طوعي عن الـ CPU لحد ما الحدث يخلص."
+ },
+ {
+  "id": "C23",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "Under non-preemptive CPU scheduling, at which moments can the scheduler dispatch a new process?",
+  "options": [
+   "Only at Moments 1 and 4",
+   "Only at Moments 2 and 3",
+   "At all 4 moments",
+   "Only on I/O completion"
+  ],
+  "answer": 0,
+  "explanation": "الـ non-preemptive scheduling بيحصل بس في اللحظتين 1 و 4 — لما العملية تروح Waiting أو تنتهي (تنازل طوعي). اللحظتين 2 و 3 فيهم اختيار، فدول preemptive."
+ },
+ {
+  "id": "C24",
+  "bank": "cs303",
+  "topic": "العمليات: fork و exec",
+  "q": "What value is returned to the child process upon successful execution of fork()?",
+  "options": [
+   "Child's PID",
+   "Parent's PID",
+   "Exactly 0",
+   "Negative integer"
+  ],
+  "answer": 2,
+  "explanation": "الـ fork بيرجع 0 للـ child، والـ parent بياخد الـ PID بتاع الـ child (رقم أكبر من صفر)."
+ },
+ {
+  "id": "C25",
+  "bank": "cs303",
+  "topic": "العمليات: fork و exec",
+  "q": "A program executes four consecutive unconditional fork() calls. What is the total number of processes created?",
+  "options": [
+   "4",
+   "8",
+   "15",
+   "16"
+  ],
+  "answer": 3,
+  "explanation": "كل fork بيضاعف عدد العمليات: 2^4 = 16 عملية (1 parent + 15 children)."
+ },
+ {
+  "id": "C26",
+  "bank": "cs303",
+  "topic": "العمليات: fork و exec",
+  "q": "What happens to the PID when a process successfully executes an exec() family call?",
+  "options": [
+   "New PID assigned",
+   "PID remains unchanged",
+   "PID increments",
+   "Process terminates"
+  ],
+  "answer": 1,
+  "explanation": "الـ exec بيستبدل صورة الذاكرة بتاعة نفس العملية — الـ PID بيفضل زي ما هو."
+ },
+ {
+  "id": "C27",
+  "bank": "cs303",
+  "topic": "العمليات: fork و exec",
+  "q": "A process that has terminated via exit() but whose parent has not yet called wait() is known as:",
+  "options": [
+   "Orphan",
+   "Daemon",
+   "Zombie",
+   "Init"
+  ],
+  "answer": 2,
+  "explanation": "عملية انتهت بـ exit() بس الأب لسه ما عملش wait() اسمها zombie — مدخلها بيفضل في جدول العمليات (حالة Z / defunct) لحد ما الأب يعمل wait()."
+ },
+ {
+  "id": "C28",
+  "bank": "cs303",
+  "topic": "الاتصال بين العمليات",
+  "q": "In message-passing IPC, what occurs when a process sends to a queue with zero capacity?",
+  "options": [
+   "Dropped silently",
+   "Sender blocks until receiver arrives",
+   "Buffer expands",
+   "Trap to kernel"
+  ],
+  "answer": 1,
+  "explanation": "سعة صفر يعني rendezvous: الـ sender بيستنى لحد ما الـ receiver يستلم."
+ },
+ {
+  "id": "C29",
+  "bank": "cs303",
+  "topic": "العمليات: fork و exec",
+  "q": "What optimization does Linux employ after fork() to prevent unnecessary physical memory copying?",
+  "options": [
+   "Compaction",
+   "Copy-on-Write (COW)",
+   "Zero-page buffering",
+   "Memory pinning"
+  ],
+  "answer": 1,
+  "explanation": "الـ COW: الصفحات المشتركة للقراءة بس بتتضاعف بس لما عملية تحاول تكتب فيها.",
+  "extra": true
+ },
+ {
+  "id": "C30",
+  "bank": "cs303",
+  "topic": "الخيوط (Threads)",
+  "q": "Which execution state components are private to each thread within a multithreaded process?",
+  "options": [
+   "Heap and files",
+   "Data and text",
+   "Stack, registers, and PC",
+   "Global variables"
+  ],
+  "answer": 2,
+  "explanation": "الـ threads بتشترك في الـ text والـ data والـ heap، بس كل thread ليه stack و registers و PC خاصين بيه."
+ },
+ {
+  "id": "C31",
+  "bank": "cs303",
+  "topic": "التزامن",
+  "q": "What is the distinction between concurrency and parallelism?",
+  "options": [
+   "Concurrency requires multi-core",
+   "Concurrency is progress on multiple tasks; parallelism is simultaneous physical execution",
+   "Concurrency is kernel-only",
+   "Parallelism is non-preemptive"
+  ],
+  "answer": 1,
+  "explanation": "الـ concurrency يعني تقدم في كذا مهمة بالتناوب (حتى على core واحد)، أما الـ parallelism فتنفيذ فعلي متزامن على cores مختلفة."
+ },
+ {
+  "id": "C32",
+  "bank": "cs303",
+  "topic": "قانون أمدال",
+  "q": "Under Amdahl’s Law, if 80% of an application is parallelized, what is the maximum speedup on infinite cores?",
+  "options": [
+   "1.25×",
+   "5.0×",
+   "8.0×",
+   "Infinite"
+  ],
+  "answer": 1,
+  "explanation": "الجزء الـ serial S = 1 − 0.80 = 0.20، والـ speedup الأقصى = 1/S = 5.0×."
+ },
+ {
+  "id": "C33",
+  "bank": "cs303",
+  "topic": "قانون أمدال",
+  "q": "In Amdahl’s Law formula Speedup ≤ 1 / [S + (1 − S)/N], what does S represent?",
+  "options": [
+   "Parallel fraction",
+   "Core count",
+   "Serial unparallelizable fraction",
+   "Quantum"
+  ],
+  "answer": 2,
+  "explanation": "الـ S في قانون أمدال هو الجزء الـ serial اللي مينفعش يتوازى."
+ },
+ {
+  "id": "C34",
+  "bank": "cs303",
+  "topic": "الخيوط (Threads)",
+  "q": "What is the fatal flaw of the Many-to-One multithreading model?",
+  "options": [
+   "Kernel table bloat",
+   "One blocking system call blocks the entire process",
+   "Cannot share heap",
+   "POSIX incompatible"
+  ],
+  "answer": 1,
+  "explanation": "في الـ Many-to-One فيه kernel thread واحد بس — لو thread عمل blocking system call، العملية كلها بتتجمد، ومفيش تنفيذ على multicore."
+ },
+ {
+  "id": "C35",
+  "bank": "cs303",
+  "topic": "الخيوط (Threads)",
+  "q": "Which multithreading model is implemented by modern general-purpose OSes like Linux and Windows?",
+  "options": [
+   "Many-to-One",
+   "One-to-One",
+   "Many-to-Many",
+   "Two-Level"
+  ],
+  "answer": 1,
+  "explanation": "الـ One-to-One: كل user thread مربوط بـ kernel thread مستقل — وده اللي Linux و Windows بيستخدموه."
+ },
+ {
+  "id": "C36",
+  "bank": "cs303",
+  "topic": "الخيوط (Threads)",
+  "q": "What is the primary design purpose of a thread pool?",
+  "options": [
+   "Eliminate mutexes",
+   "Bound active threads and avoid creation latency",
+   "Run user space only",
+   "Single PC mapping"
+  ],
+  "answer": 1,
+  "explanation": "الـ thread pool بيحد عدد الـ threads النشطة وبيتجنب تكلفة إنشاء thread جديد كل مرة — threads جاهزة بتتعاد استخدامها."
+ },
+ {
+  "id": "C37",
+  "bank": "cs303",
+  "topic": "الخيوط (Threads)",
+  "q": "Which thread cancellation mode allows a thread to reach an explicit cancellation point before exiting?",
+  "options": [
+   "Asynchronous",
+   "Deferred",
+   "Preemptive",
+   "Orphan"
+  ],
+  "answer": 1,
+  "explanation": "الـ deferred cancellation بيخلي الـ thread يكمل لحد نقطة إلغاء صريحة فينضف موارده بأمان، أما الـ asynchronous فبيوقفه فورًا."
+ },
+ {
+  "id": "C38",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "What is the time required by the dispatcher to stop one process and start another called?",
+  "options": [
+   "Turnaround",
+   "Waiting",
+   "Dispatch latency",
+   "Response"
+  ],
+  "answer": 2,
+  "explanation": "الـ dispatch latency هو الوقت اللي الـ dispatcher بياخده عشان يوقف عملية ويشغل غيرها — overhead خالص، مفيش فيه تنفيذ كود user."
+ },
+ {
+  "id": "C39",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "How is Turnaround Time mathematically defined?",
+  "options": [
+   "Finish − First Run",
+   "Finish − Arrival",
+   "Wait + Response",
+   "Burst − Quantum"
+  ],
+  "answer": 1,
+  "explanation": "الـ turnaround time = وقت الانتهاء − وقت الوصول — إجمالي الوقت من التقديم لحد النهاية."
+ },
+ {
+  "id": "C40",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "What phenomenon describes short processes experiencing large delays behind a long CPU-bound process in FCFS?",
+  "options": [
+   "Starvation",
+   "Priority Inversion",
+   "Convoy Effect",
+   "Thrashing"
+  ],
+  "answer": 2,
+  "explanation": "الـ convoy effect: عمليات قصيرة I/O-bound بتستنى ورا عملية CPU-bound طويلة في الـ FCFS، فأجهزة الـ I/O بتفضل فاضية."
+ },
+ {
+  "id": "C41",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "Why is Shortest-Job-First (SJF) scheduling provably optimal?",
+  "options": [
+   "Maximizes utilization",
+   "Minimizes average waiting time",
+   "Zero dispatch latency",
+   "Zero response time"
+  ],
+  "answer": 1,
+  "explanation": "الـ SJF هو الـ optimal لأنه بيدي أقل average waiting time — ترتيب الـ bursts القصيرة الأول بيقلل الانتظار التراكمي."
+ },
+ {
+  "id": "C42",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "What is the preemptive counterpart of the Shortest-Job-First (SJF) algorithm?",
+  "options": [
+   "FCFS",
+   "Shortest-Remaining-Time-First (SRTF)",
+   "Round Robin",
+   "Priority"
+  ],
+  "answer": 1,
+  "explanation": "المقابل الـ preemptive للـ SJF هو الـ SRTF — لو وصلت عملية بوقت متبقّي أقل، بتوقف اللي شغالة."
+ },
+ {
+  "id": "C43",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "In exponential smoothing τn+1 = α·tn + (1 − α)·τn, setting α = 1 means:",
+  "options": [
+   "Prediction equals τ0",
+   "History ignored; prediction equals last actual burst tn",
+   "FCFS behavior",
+   "Infinite weight to τn"
+  ],
+  "answer": 1,
+  "explanation": "مع α = 1: τn+1 = 1·tn + 0·τn = tn — التنبؤ = آخر burst فعلي بس، والتاريخ كله بيتجاهل."
+ },
+ {
+  "id": "C44",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "What occurs in Round Robin scheduling if the time quantum q approaches infinity?",
+  "options": [
+   "Degenerates into FCFS",
+   "Degenerates into SJF",
+   "High context switches",
+   "Zero wait time"
+  ],
+  "answer": 0,
+  "explanation": "لو الـ quantum → ∞، مفيش عملية بتتقطع — كل عملية بتكمل لآخرها بترتيب الوصول، يعني FCFS."
+ },
+ {
+  "id": "C45",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "What is the recommended rule of thumb for configuring Round Robin quantum q?",
+  "options": [
+   "Equal to context switch",
+   "80% of CPU bursts should be shorter than q",
+   "Smaller than shortest burst",
+   "Double the longest burst"
+  ],
+  "answer": 1,
+  "explanation": "القاعدة: 80% من الـ CPU bursts لازم تكون أقصر من الـ quantum — كده الـ response سريع من غير context switches كتير."
+ },
+ {
+  "id": "C46",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "What fundamental vulnerability arises in static Priority Scheduling when high-priority tasks arrive continuously?",
+  "options": [
+   "Convoy effect",
+   "Starvation (Indefinite Blocking)",
+   "Thrashing",
+   "Race conditions"
+  ],
+  "answer": 1,
+  "explanation": "في الـ static priority، لو عمليات عالية الأولوية بتيجي على طول، العمليات الواطية ممكن متشتغلش أبدًا — starvation (indefinite blocking)."
+ },
+ {
+  "id": "C47",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "How does an operating system prevent starvation in priority scheduling?",
+  "options": [
+   "Terminating long jobs",
+   "Aging: gradually increasing priority of waiting processes",
+   "LIFO queues",
+   "Zero quantum"
+  ],
+  "answer": 1,
+  "explanation": "الـ aging: أولوية العملية اللي مستنية بتزيد تدريجيًا مع الوقت لحد ما تشتغل."
+ },
+ {
+  "id": "C48",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "In a Multilevel Feedback Queue (MLFQ), what typically causes a process to be demoted to a lower queue?",
+  "options": [
+   "I/O yield",
+   "Consuming its entire time quantum without yielding",
+   "Waiting too long",
+   "Core migration"
+  ],
+  "answer": 1,
+  "explanation": "في الـ MLFQ، العملية اللي بتستهلك الـ quantum كله من غير ما تتنازل بتنزل queue أقل؛ العمليات التفاعلية بتتنازل بدري وبتفضل فوق."
+ },
+ {
+  "id": "C49",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "In multiprocessor scheduling, what differentiates push migration from pull migration?",
+  "options": [
+   "User vs. kernel",
+   "Push moves tasks from overloaded cores; pull lets idle cores steal tasks",
+   "Thread vs. process",
+   "Affinity compliance"
+  ],
+  "answer": 1,
+  "explanation": "الـ push: مراقب الـ OS بينقل المهام من الـ cores الزحمة بشكل دوري؛ الـ pull: الـ core الفاضي بيسحب مهام بنفسه فورًا.",
+  "extra": true
+ },
+ {
+  "id": "C50",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "How does the Linux Completely Fair Scheduler (CFS) select the next task to run?",
+  "options": [
+   "Static nice value",
+   "Smallest vruntime at rb_leftmost node of Red-Black tree",
+   "Fixed 10 ms RR",
+   "Longest I/O burst"
+  ],
+  "answer": 1,
+  "explanation": "الـ CFS بيختار العملية اللي عندها أقل vruntime — أقل وقت CPU افتراضي — من أقصى شمال شجرة الـ Red-Black."
+ },
+ {
+  "id": "C51",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "What does Little’s Law state for steady-state queuing systems?",
+  "options": [
+   "Page fault rates",
+   "n = λ × W relating queue length, arrival rate, and wait time",
+   "Peterson bounded wait",
+   "NUMA hit ratio"
+  ],
+  "answer": 1,
+  "explanation": "قانون Little: n = λ × W — متوسط طول الـ queue = متوسط معدل الوصول × متوسط وقت الانتظار."
+ },
+ {
+  "id": "C52",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "Which of the following is NOT one of the three mandatory criteria for a critical-section solution?",
+  "options": [
+   "Mutual Exclusion",
+   "Progress",
+   "Bounded Waiting",
+   "Starvation Preemption"
+  ],
+  "answer": 3,
+  "explanation": "الشروط التلاتة الإجبارية هي mutual exclusion و progress و bounded waiting بس — الـ starvation preemption مش منهم."
+ },
+ {
+  "id": "C53",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "Why does strict alternation using a single turn variable fail as a lock?",
+  "options": [
+   "Violates Mutual Exclusion",
+   "Violates Progress because an idle process blocks another",
+   "Kernel crash",
+   "Violates Bounded Waiting"
+  ],
+  "answer": 1,
+  "explanation": "الـ strict alternation بمتغير turn واحد بيحقق الـ mutual exclusion بس بيكسر الـ progress: لو P0 في الـ remainder section و P1 عايز يدخل، P1 بيتقفل عليه حتى لو الـ CS فاضي."
+ },
+ {
+  "id": "C54",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "In Peterson’s Solution, what does the statement turn = j; in process Pi signify?",
+  "options": [
+   "Grabs lock",
+   "Grants precedence to Pj (\"after you\")",
+   "Resets lock flag",
+   "Disables interrupts"
+  ],
+  "answer": 1,
+  "explanation": "الـ turn = j معناها «بعدك» — الـ Pi بيدي الأولوية لـ Pj، واللي يكتب الـ turn آخر واحد هو اللي بيستنى."
+ },
+ {
+  "id": "C55",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "What architectural issue causes Peterson’s Solution to fail on modern multi-core CPUs without memory barriers?",
+  "options": [
+   "Instruction reordering of independent reads/writes",
+   "Fast PID reuse",
+   "Unshared booleans",
+   "Timer interrupts"
+  ],
+  "answer": 0,
+  "explanation": "الـ CPUs الحديثة بتعيد ترتيب عمليات الذاكرة (instruction reordering) — فلازم memory barrier عشان ترتيب كتابة الـ flags يفضل صح."
+ },
+ {
+  "id": "C56",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "What does the atomic hardware instruction test_and_set(&lock) return?",
+  "options": [
+   "New value written",
+   "Original previous value before setting to true",
+   "Always 0",
+   "Calling PID"
+  ],
+  "answer": 1,
+  "explanation": "الـ test_and_set بيرجع القيمة القديمة قبل ما يكتب true — لو رجع false يبقى انت اللي خدت الـ lock."
+ },
+ {
+  "id": "C57",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "Under what exact condition is a spinlock preferred over a blocking mutex lock?",
+  "options": [
+   "Single core",
+   "Multi-core when lock hold time is less than two context switches",
+   "Heavy disk I/O",
+   "Unbounded waiting"
+  ],
+  "answer": 1,
+  "explanation": "الـ spinlock أحسن على multicore لما زمن مسك الـ lock أقل من زمن اتنين context switches — كده بتتجنب تكلفة النوم والصحيان."
+ },
+ {
+  "id": "C58",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "In a semaphore with a blocking queue, what does a negative value of S.value indicate?",
+  "options": [
+   "System error",
+   "Available resources",
+   "|S.value| processes are currently sleeping in the queue",
+   "Lock bypassed"
+  ],
+  "answer": 2,
+  "explanation": "في الـ semaphore اللي فيه blocking queue، قيمة سالبة معناها إن |S.value| عملية نايمة في الـ queue مستنية."
+ },
+ {
+  "id": "C59",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "In the Bounded-Buffer problem with buffer size n, what are the initial semaphore values?",
+  "options": [
+   "mutex=0, empty=0, full=n",
+   "mutex=1, empty=n, full=0",
+   "mutex=1, empty=1, full=1",
+   "mutex=n, empty=0, full=1"
+  ],
+  "answer": 1,
+  "explanation": "في الـ bounded-buffer بحجم n: mutex = 1 (حماية)، empty = n (الأماكن الفاضية)، full = 0 (العناصر الموجودة)."
+ },
+ {
+  "id": "C60",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "In the Bounded-Buffer producer, what happens if a programmer writes wait(mutex); wait(empty);?",
+  "options": [
+   "Faster execution",
+   "When full, producer holds mutex and sleeps on empty causing Deadlock",
+   "Consumer reads garbage",
+   "Syntax error"
+  ],
+  "answer": 1,
+  "explanation": "لو الـ producer عمل wait(mutex) قبل wait(empty) والـ buffer مليان، هيمسك الـ mutex وينام على الـ empty — والـ consumer مش هيقدر يدخل يستهلك أو يعمل signal — deadlock."
+ },
+ {
+  "id": "C61",
+  "bank": "cs303",
+  "topic": "العمليات: fork و exec",
+  "q": "When a process calls exec(), the kernel creates a new process with a new PID to execute the target program.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — الـ exec بيستبدل الـ address space بتاع نفس العملية، والـ PID والـ PPID بيفضلوا زي ما هم."
+ },
+ {
+  "id": "C62",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "In non-preemptive CPU scheduling, the operating system can interrupt a running process if a shorter job arrives.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — الـ non-preemptive مبيقطعش عملية شغالة أبدًا، حتى لو وصلت عملية أقصر؛ العملية بتفضل لحد ما تتنازل أو تنتهي."
+ },
+ {
+  "id": "C63",
+  "bank": "cs303",
+  "topic": "قانون أمدال",
+  "q": "Amdahl’s Law proves that adding processing cores yields diminishing returns whenever any serial component exists.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 0,
+  "explanation": "صح — الجزء الـ serial S بيحط سقف مطلق للـ speedup = 1/S مهما زودت الـ cores."
+ },
+ {
+  "id": "C64",
+  "bank": "cs303",
+  "topic": "الخيوط (Threads)",
+  "q": "Threads belonging to the same process share their stack memory to facilitate fast function parameter passing.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — كل thread ليه stack و registers خاصين بيه؛ اللي مشترك هو الـ heap والـ data."
+ },
+ {
+  "id": "C65",
+  "bank": "cs303",
+  "topic": "حالات العمليات",
+  "q": "A process in the Waiting state is actively competing for CPU instruction execution cycles in the ready queue.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — العملية في الـ Waiting مستنية I/O أو حدث، ومش بتنافس على الـ CPU؛ بس الـ Ready هم اللي بينافسوا."
+ },
+ {
+  "id": "C66",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "The Shortest-Job-First (SJF) scheduling algorithm is provably immune to process starvation.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — العمليات الطويلة بتجوع (starve) لو العمليات القصيرة بتيجي على طول في الـ SJF."
+ },
+ {
+  "id": "C67",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "If the time quantum in Round Robin is larger than every process burst time, it behaves identically to FCFS.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 0,
+  "explanation": "صح — لو الـ quantum أكبر من كل الـ bursts، مفيش عملية بتتقطع بالـ timer، فبيبقى FCFS بالظبط."
+ },
+ {
+  "id": "C68",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "Peterson’s Solution scales directly to coordinate any arbitrary number N of concurrent processes.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — حل Peterson معمول لعمليتين بس (2 processes)، والـ N processes محتاجين الـ Bakery algorithm."
+ },
+ {
+  "id": "C69",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "Disabling hardware interrupts is a safe and recommended synchronization mechanism for user applications on multi-core systems.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — قفل الـ interrupts مش بيوقف التنفيذ المتزامن على cores تانية، ومسموح بيه في الـ kernel mode بس."
+ },
+ {
+  "id": "C70",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "A spinlock is wasteful on a single-core CPU because the spinning thread burns CPU time needed by the lock holder.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 0,
+  "explanation": "صح — على single-core، الـ thread اللي بيلف بيحرق الـ CPU اللي الـ lock holder محتاجه عشان يشتغل ويفك الـ lock."
+ },
+ {
+  "id": "C71",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "In the blocking queue implementation of a semaphore, wait() decrements the counter before checking if it must block.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 0,
+  "explanation": "صح — الـ wait() بيعمل S->value-- الأول، ولو بقت سالبة العملية بتنام."
+ },
+ {
+  "id": "C72",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "In Peterson’s Solution, the process that sets the turn variable last is the one that enters the critical section first.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — اللي بيكتب الـ turn آخر واحد هو اللي بيقول «بعدك» وبيستنى، مش اللي بيدخل الأول."
+ },
+ {
+  "id": "C73",
+  "bank": "cs303",
+  "topic": "العمليات: fork و exec",
+  "q": "When a parent process terminates before its child without calling wait(), the child becomes a zombie forever.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — الـ child بيبقى orphan وبيتبناه systemd / init (PID 1) اللي بيعمل wait() عشان ينضفه، مش zombie للأبد."
+ },
+ {
+  "id": "C74",
+  "bank": "cs303",
+  "topic": "حالات العمليات",
+  "q": "Context-switch latency represents productive execution time because the kernel is actively managing process states.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — الـ context switch overhead خالص، مفيش فيه تنفيذ تعليمات user مفيدة."
+ },
+ {
+  "id": "C75",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "The First Readers-Writers problem avoids reader starvation, but can lead to writer starvation under continuous readers.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 0,
+  "explanation": "صح — في الـ First Readers-Writers، الـ readers المستمرين بيخلوا الـ rw_mutex مقفول على طول، فالـ writers بتجوع.",
+  "extra": true
+ },
+ {
+  "id": "C76",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "Hard processor affinity allows the operating system scheduler to migrate a thread to an idle core under load imbalance.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — الـ hard affinity بيحبس الـ thread في مجموعة CPUs معينة وبيمنع نقله، حتى لو فيه core فاضي.",
+  "extra": true
+ },
+ {
+  "id": "C77",
+  "bank": "cs303",
+  "topic": "الجدولة",
+  "q": "In Linux CFS, processes with lower nice values accumulate vruntime at a slower rate than processes with higher nice values.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 0,
+  "explanation": "صح — الـ nice الأقل يعني أولوية أعلى ووزن أكبر، فالـ vruntime بيزيد بمعدل أبطأ."
+ },
+ {
+  "id": "C78",
+  "bank": "cs303",
+  "topic": "الجمود (Deadlock)",
+  "q": "The Priority-Inheritance Protocol prevents Priority Inversion by permanently elevating the priority of low-priority tasks.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — رفع الأولوية مؤقت بس، طول ما الـ low-priority task ماسك الـ lock المتنازع عليه."
+ },
+ {
+  "id": "C79",
+  "bank": "cs303",
+  "topic": "الاتصال بين العمليات",
+  "q": "Direct communication in message passing requires communicating processes to share an explicit common mailbox identifier.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 1,
+  "explanation": "غلط — الـ direct communication بيسمّي الـ process بالـ PID صراحة (زي send(P, msg))، أما الـ mailboxes فدي الـ indirect."
+ },
+ {
+  "id": "C80",
+  "bank": "cs303",
+  "topic": "الأقسام الحرجة",
+  "q": "A binary semaphore initialized to 1 can be used interchangeably with a mutex lock to enforce mutual exclusion.",
+  "options": [
+   "True",
+   "False"
+  ],
+  "answer": 0,
+  "explanation": "صح — الـ binary semaphore اللي قيمته الابتدائية 1 بيشتغل زي الـ mutex lock بالظبط في فرض الـ mutual exclusion."
  }
 ]
